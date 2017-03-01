@@ -1,0 +1,39 @@
+#!/bin/sh
+
+# exit if any command fails
+# set -eo pipefail ...why does that not work?
+set -e
+
+# run script from drupal root
+# syntax:
+# `dinstall profilename single`
+# or
+# `dinstall profilename multi`
+# display message if no arguments supplied:
+if [ $# -eq 0 ]; then
+  printf "Specify name of install profile then 'single' or 'multi' as in: \n dinstall standard single\n"
+  exit 64
+fi
+
+name="$(echo $PWD | sed 's/\/var\/www\///' | sed 's/\/docroot//')"
+
+if [ $2 = 'single' ]; then
+#  echo 'install a single-site drupal instance'
+  sudo chmod -R 775 .
+  sudo chown -R alec:www-data .
+  drush si $1 --db-url=mysql://root:lOv131@localhost/$name --site-name=$name -y
+  cp /etc/apache2/sites-available/blank.conf /etc/apache2/sites-available/$name.dev.conf
+  sed -i "s@PWD@$PWD@" /etc/apache2/sites-available/$name.dev.conf
+  sed -i "s/NAME/$name/" /etc/apache2/sites-available/$name.dev.conf
+  sudo a2ensite $name.dev
+  sudo service apache2 restart
+  echo '127.0.0.1 newsitename.dev' >> /etc/hosts
+  sudo sed -i "s/newsitename/$name/" /etc/hosts
+fi
+
+# now it should move db config from settings.php to local.settings.php
+
+# then it should have an option for a multisite installation
+# if [ $2 = 'multi' ]; then
+#   do stuff
+# fi

@@ -1,0 +1,15 @@
+#!/bin/bash
+# dfs = drush features-status
+# give us info about a given feature module
+
+# give us module info
+drush pmi $1
+
+# list the components used by feature module
+drush fc \% | grep $1
+
+# insert blank line for readability
+printf "\n"
+
+# show changes between module and database
+drush fd $1

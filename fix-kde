@@ -1,0 +1,3 @@
+# fix kde when plasma desktop breaks
+# kquitapp plasma-desktop && plasma-desktop
+killall plasma-desktop && plasma-desktop

@@ -1,0 +1,14 @@
+#!/bin/bash
+#godark
+
+# Change Terminator Color
+# better done through UI
+# rm ~/.config/terminator/config
+# cp ~/.config/terminator/darkConfig ~/.config/terminator/config
+
+# Change Vim Color
+sed -i 's/set background=light/set background=dark/g' ~/.vimrc
+
+# Change Command Prompt
+sed -i 's/ZSH_THEME="bureaulight"/ZSH_THEME="bureau"/' ~/.zshrc
+source ~/.zshrc

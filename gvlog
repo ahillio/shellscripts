@@ -1,0 +1,4 @@
+inotifywait -m -r -e modify -e create -e close_write -e attrib .git/ | while read ; do
+  clear
+  git --no-pager log -2
+done
