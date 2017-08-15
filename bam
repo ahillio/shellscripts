@@ -1,0 +1,9 @@
+#! /bin/sh
+
+# should check if $1 contains spaces
+# if it does then
+# prename all the files in that directory
+# then proceed with the following:
+sed -i '4,$d' index.php
+cat $1 >> index.php
+sed -i '4d' index.php
