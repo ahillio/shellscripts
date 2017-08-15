@@ -1,0 +1,27 @@
+#!/bin/zsh
+# must be zsh and not sh due to bizarre history blips
+# https://superuser.com/questions/527299/how-to-call-history-fc-from-a-zsh-script
+
+# Command:
+# Yank History -- "yank" as in Vim terminology
+# copy last command to system clipboard
+
+export HISTFILE=~/.zsh_history
+fc -R
+fc -l | tail -n 2 | sed -n '1p' | sed 's/[0-9]*  //' | xclip -selection c
+
+# fc -l -1 | sed 's/\d+ //' | xclip
+# history | tail -n 1 | sed 's/\d+ //' xclip
+# sed does not work in this:
+# fc -l | tail -n 1 | sed 's/\d+\w\w//'
+# this works: fc -l | tail -n 1
+# \d* does not work:
+# fc -l | sed -n '1p' | sed 's/\d*  //'
+# wtf? fc -l | sed -n '1p' | sed -r 's/[0-9]*  //'
+# fails to get the last line fc -l | sed -n '1p'
+# just prints `yh` fc -l | tail -n 1 | sed -r 's/[0-9]*  //'
+# AND FINALLY THE ONE THAT WORKS:
+# fc -l | tail -n 2 | sed '/yh/d' | sed 's/[0-9]*  //' | xclip -selection c
+# holy fuck that took a long time
+# but it's better to remove the last line than to remove string 'yh'
+# fc -l | tail -n 2 | sed -n '1p' | sed 's/[0-9]*  //' | xclip -selection c
