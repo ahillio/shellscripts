@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# exit if any command fails
+# set -eo pipefail ...why does that not work?
+set -e
+
+tree $1 | peco
