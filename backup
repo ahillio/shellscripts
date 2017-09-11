@@ -5,3 +5,9 @@
 set -e
 
 rsync -avr /var/www/ /media/alec/storage/www
+rsync -avr /home/alec/accounting/ /media/alec/storage/accounting
+rsync -avr /home/alec/Webworks/ /media/alec/storage/Webworks
+rsync -avr /home/alec/ahillio_labs/ /media/alec/storage/ahillio_labs
+rsync -avr /home/alec/Documents/ /media/alec/storage/Documents
+
+
