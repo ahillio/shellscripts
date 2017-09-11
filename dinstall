@@ -4,6 +4,9 @@
 # set -eo pipefail ...why does that not work?
 set -e
 
+# @todo: needs logic to check for existing site names!
+# @todo: check and set appropriate drush version?
+
 # run script from drupal root
 # syntax:
 # `dinstall profilename single`
@@ -46,4 +49,8 @@ if [ $2 = 'multi' ]; then
   echo '127.0.0.1 newsitename.dev' >> /etc/hosts
   sudo sed -i "s/newsitename/$name/" /etc/hosts
   sed -i "/);/i \t'$name.dev' => '$name'," sites/sites.php
+  # last sed does not work
+  # perhaps add:
+  # \'$'
+  # before the \t character
 fi
