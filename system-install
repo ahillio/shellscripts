@@ -1,0 +1,87 @@
+apt-get update
+apt-get upgrade
+apt-get install git gcc make pkg-config libx11-dev libxtst-dev libxi-dev
+git clone https://github.com/alols/xcape.git && xcape
+make
+make install
+cd
+git clone git@github.com:ahillio/dotfiles.git
+ln -s dotfiles/.xinitrc .xinitrc
+
+apt-get install zsh
+chsh -s /bin/zsh
+# reboot computer for shell to change
+ln -s dotfiles/.zshrc .zshrc
+apt-get install tmux
+ln -s dotfiles/.tmux.conf .tmux.conf
+sudo gem install tmuxinator
+
+sudo apt-get install ack-grep
+
+apt-get install vim-gtk
+
+sudo apt-get install php
+sudo apt-get install php-xml
+sudo apt-get install libapache2-mod-php7.0
+sudo apt-get install php7.0-sqlite3
+sudo apt-get install php-mysql
+sudo apt-get install php-gd
+
+sudo a2enmod rewrite
+sudo vi /etc/apache2/apache2.conf && s/None/All for AllowOverride in the /var/www directory.
+sudo service apache2 restart
+
+wget https://git.io/psysh
+chmod +x psysh
+sudo mv psysh /usr/local/bin/
+wget http://psysh.org/manual/en/php_manual.sqlite
+sudo mkdir /usr/local/share/psysh
+sudo mv php_manual.sqlite /usr/local/share/psysh
+
+
+sudo apt-get install mysql-server
+sudo apt-get install apache2
+sudo apt-get install tig
+sudo apt-get install
+
+@todo install
+- nodejs
+- gulp
+- sass
+- php: install & configure
+    - xdebug
+    - composer
+    - drush
+    - drupal console
+- mysql
+- adminer
+    - sudo mkdir /usr/share/adminer
+    # should retreive from git instead?
+    - sudo wget "http://www.adminer.org/latest.php" -O /usr/share/adminer/latest.php
+    - sudo ln -s /usr/share/adminer/latest.php /usr/share/adminer/adminer.php
+    - echo "Alias /adminer.php /usr/share/adminer/adminer.php" | sudo tee /etc/apache2/conf-available/adminer.conf
+    - sudo a2enconf adminer.conf
+    - sudo service apache2 restart
+    # when wanting to update:
+    # sudo wget "http://www.adminer.org/latest.php" -O /usr/share/adminer/latest.php
+    # per: https://www.leaseweb.com/labs/2014/06/install-adminer-manually-ubuntu-14-04/
+- xclip
+
+apt-get install chromium-browser gimp inkscape scribus libreoffice
+sudo apt-get install
+ - & then go and modify the [Print] key to use shutter for full-screen shot
+
+# following lines might be no good
+# the SHA might change
+# here's a script https://getcomposer.org/doc/faqs/how-to-install-composer-programmatically.md
+# and the following lines are from https://getcomposer.org/download/
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php -r "if (hash_file('SHA384', 'composer-setup.php') === '544e09ee996cdf60ece3804abc52599c22b1f40f4323403c44d44fdfdd586475ca9813a858088ffbc1f233e9b180f061') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php composer-setup.php
+sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+
+wget https://github.com/drush-ops/drush/releases/download/8.1.15/drush.phar
+chmod +x drush.phar
+sudo mv drush.phar /usr/local/bin/drush
+# option: enrich bash startup file with completion and aliases
+# drush init
