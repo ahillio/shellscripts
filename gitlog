@@ -1,0 +1,7 @@
+#! /bin/sh
+
+inotifywait -m -r -e modify -e create -e close_write -e attrib /var/www/ah/.git/ | while read ; do
+  clear
+  git vlog
+done
+
