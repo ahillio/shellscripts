@@ -8,7 +8,14 @@
 
 export HISTFILE=~/.zsh_history
 fc -R
-fc -l | tail -n 2 | sed -n '1p' | sed 's/[0-9]*  //' | xclip -selection c
+fc -l | tail -n 2 | sed 's/  [0-9]*  //' | sed 's/yh//' | tr -d '\n' | xclip -selection c
+# fc = file compare, not sure why it's needed
+# tail -n 2 = gets last two lines of histroy file (even though history file's not supplied as a parameter - how does that work?)
+# sed1 = remove number from beginning of line
+# sed2 = remove yh from next line
+# tr = remove new line
+# note: sed2&tr used to be accomplished by a single sed command
+# xclip = copies to clipboard
 
 # fc -l -1 | sed 's/\d+ //' | xclip
 # history | tail -n 1 | sed 's/\d+ //' xclip
