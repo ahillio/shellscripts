@@ -6,6 +6,8 @@ set -e
 
 # @todo: needs logic to check for existing site names!
 # @todo: check and set appropriate drush version?
+#        actually just use drush8 globally
+#        or 9?
 
 # run script from drupal root
 # syntax:
@@ -20,16 +22,16 @@ fi
 
 
 if [ $2 = 'single' ]; then
-  name="$(echo $PWD | sed 's/\/var\/www\///' | sed 's/\/docroot//')"
+  name="$(echo $PWD | sed 's/\/home\/alec\/www\///' | sed 's/\/docroot//')"
   sudo chmod -R 775 .
   sudo chown -R alec:www-data .
-  drush si $1 --db-url=mysql://root:lOv131@localhost/$name --site-name=$name -y
-  cp /etc/apache2/sites-available/blank.conf /etc/apache2/sites-available/$name.dev.conf
-  sed -i "s@PWD@$PWD@" /etc/apache2/sites-available/$name.dev.conf
-  sed -i "s/NAME/$name/" /etc/apache2/sites-available/$name.dev.conf
-  sudo a2ensite $name.dev
+  drush si $1 install_configure_form.update_status_module='array(FALSE,FALSE)' --db-url=mysql://root:lOv131@localhost/$name --site-name=$name -y
+  sudo cp ~/bin/inc/apache-site-vhost.conf /etc/apache2/sites-available/$name.localhost.conf
+  sudo sed -i "s@PWD@$PWD@" /etc/apache2/sites-available/$name.localhost.conf
+  sudo sed -i "s/NAME/$name/" /etc/apache2/sites-available/$name.localhost.conf
+  sudo a2ensite $name.localhost
   sudo service apache2 restart
-  echo '127.0.0.1 newsitename.dev' >> /etc/hosts
+  sudo bash -c "echo '127.0.0.1 newsitename.localhost' >> /etc/hosts"
   sudo sed -i "s/newsitename/$name/" /etc/hosts
   # now it should move db config from settings.php to local.settings.php
   # wouldn't that be cool :)
@@ -40,7 +42,7 @@ if [ $2 = 'multi' ]; then
   rootdir="$(echo $PWD | sed 's/\/var\/www\///')"
   sudo chmod -R 775 .
   sudo chown -R alec:www-data .
-  drush8 si $1 --db-url=mysql://root:lOv131@localhost/$name --site-name=$name --sites-subdir=$name -y
+  drush si $1 --db-url=mysql://root:lOv131@localhost/$name --site-name=$name --sites-subdir=$name -y
   cp /etc/apache2/sites-available/blank.conf /etc/apache2/sites-available/$name.dev.conf
   sed -i "s@PWD@$PWD@" /etc/apache2/sites-available/$name.dev.conf
   sed -i "s/NAME/$name/" /etc/apache2/sites-available/$name.dev.conf
