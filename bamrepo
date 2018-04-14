@@ -1,0 +1,17 @@
+#! /bin/bash
+
+echo "Creating git repository..."
+git init
+echo "steps" > .gitignore
+git add .gitignore
+git commit -m "Begin."
+git add . && git commit -m "Track files."
+modulefile=$(ls | grep module)
+echo "Repository created, now adding steps..."
+for file in $(ls steps); do
+  cat steps/$file > $modulefile
+  stepnumber=$(echo "$file" | sed 's/\([0-9]*\).*/\1/g')
+  #echo $stepnumber
+  git commit -a -m "Step $stepnumber."
+done
+echo "Steps have been added to the repo.  Script complete."
