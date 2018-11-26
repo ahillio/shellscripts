@@ -1,6 +1,7 @@
 apt-get update
 apt-get upgrade
 apt-get install git gcc make pkg-config libx11-dev libxtst-dev libxi-dev
+sudo apt-get install tig
 git clone https://github.com/alols/xcape.git && xcape
 make
 make install
@@ -8,10 +9,15 @@ cd
 git clone git@github.com:ahillio/dotfiles.git
 ln -s dotfiles/.xinitrc .xinitrc
 
+sudo apt-get install httpie
+sudo apt-get install curl
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 apt-get install zsh
 chsh -s /bin/zsh
 # reboot computer for shell to change
+git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
 ln -s dotfiles/.zshrc .zshrc
+
 apt-get install tmux
 ln -s dotfiles/.tmux.conf .tmux.conf
 sudo gem install tmuxinator
@@ -20,17 +26,33 @@ sudo apt-get install ack-grep
 
 apt-get install vim-gtk
 
-sudo apt-get install php
-sudo apt-get install php-xml
-sudo apt-get install libapache2-mod-php7.0
-sudo apt-get install php7.0-sqlite3
-sudo apt-get install php-mysql
-sudo apt-get install php-gd
-sudo apt-get install php-curl
-sudo apt-get install php-mbstring
+apt-get install ctags
 
+apt-get install tree
+
+wget https://github.com/peco/peco/releases/download/v0.5.3/peco_linux_amd64.tar.gz
+tar -xvf peco_linux_amd64.tar.gz
+mv peco_linux_amd64/peco bin
+
+cd ~/bin && git clone https://github.com/rupa/z && rm -rf z/.git
+
+sudo apt-get install php php-xml libapache2-mod-php7.0 php7.0-sqlite3 php-mysql php-gd php-curl php-mbstring php-zip
+sudo apt-get install mysql-server
+sudo apt-get install apache2
 sudo a2enmod rewrite
+# geez, wtf re: threading!
+sudo a2dismod mpm_event
+sudo a2enmod mpm_prefork
+# end of threading hack
+sudo apt-get install php-pear
+sudp apt-get install php-dev
+sudo pecl install xdebug
+find /usr -name 'xdebug.so' #returns: /usr/lib/php/20151012/xdebug.so
+sudo echo 'zend_extension="/usr/lib/php/20151012/xdebug.so"' >> /etc/php/7.0/apache2/php.ini
+sudo echo 'xdebug.idekey="PHPSTORM"' >> /etc/php/7.0/apache2/php.ini
+# and configure chromium xdebug extension to use PHPSTORM ide key
 sudo vi /etc/apache2/apache2.conf && s/None/All for AllowOverride in the /var/www directory.
+#? sudo echo 'ServerName 127.0.0.1' >> /etc/apache2/apache2.conf
 sudo service apache2 restart
 
 wget https://git.io/psysh
@@ -40,11 +62,9 @@ wget http://psysh.org/manual/en/php_manual.sqlite
 sudo mkdir /usr/local/share/psysh
 sudo mv php_manual.sqlite /usr/local/share/psysh
 
-
-sudo apt-get install mysql-server
-sudo apt-get install apache2
-sudo apt-get install tig
-sudo apt-get install
+sudo apt-get install texlive-latex-base texlive-fonts-recommended texlive-fonts-extra python-pygments texlive-latex-extra texlive-extra-utils
+sudo apt-get install python-pip 
+pip install Pygments
 
 @todo install
 - nodejs
@@ -87,3 +107,17 @@ chmod +x drush.phar
 sudo mv drush.phar /usr/local/bin/drush
 # option: enrich bash startup file with completion and aliases
 # drush init
+
+---
+
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php -r "if (hash_file('SHA384', 'composer-setup.php') === '544e09ee996cdf60ece3804abc52599c22b1f40f4323403c44d44fdfdd586475ca9813a858088ffbc1f233e9b180f061') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php composer-setup.php
+php -r "unlink('composer-setup.php');"
+sudo mv composer.phar /usr/local/bin/composer
+echo 'export PATH="$HOME/.composer/vendor/bin:$PATH"' >> .zshrc
+composer global require drush/drush ##doesn't work :(
+
+sudo gem install tmuxinator
+
+sudo apt-get install imagemagick

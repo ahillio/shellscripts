@@ -10,8 +10,8 @@ modulefile=$(ls | grep module)
 echo "Repository created, now adding steps..."
 for file in $(ls steps); do
   cat steps/$file > $modulefile
-  stepnumber=$(echo "$file" | sed 's/\([0-9]*\).*/\1/g')
-  #echo $stepnumber
-  git commit -a -m "Step $stepnumber."
+  stepnumber=$(echo "$file" | sed 's|\([0-9]*\).*|\1|g')
+  stepname=$(echo "$file" | sed 's|\([0-9]*\)\.||' | sed 's|\(.*\.module\.\)||' | sed 's|\.step||' | sed 's|-| |g')
+  git commit -a -m "Step $stepnumber - $stepname."
 done
 echo "Steps have been added to the repo.  Script complete."

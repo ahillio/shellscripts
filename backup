@@ -4,10 +4,32 @@
 # set -eo pipefail ...why does that not work?
 set -e
 
-rsync -avr /var/www/ /media/alec/storage/www
-rsync -avr /home/alec/accounting/ /media/alec/storage/accounting
-rsync -avr /home/alec/Webworks/ /media/alec/storage/Webworks
-rsync -avr /home/alec/ahillio_labs/ /media/alec/storage/ahillio_labs
-rsync -avr /home/alec/Documents/ /media/alec/storage/Documents
+printf "Begin syncing www."
+# rsync takes so damn long
 
+#rsync -avr ~/www/ /media/alec/storage/www
+#printf "Done syncing www.\nNow sync accounting."
+
+rsync -avr --exclude='*.sql' --exclude='*.tgz' --exclude='*.gz' /home/alec/accounting/ /media/alec/storage/accounting
+printf "\nDone syncing accounting.\nNow sync Webworks.\n"
+
+# rsync -avr /home/alec/Webworks/ /media/alec/storage/Webworks
+rsync -avrz --exclude='*.sql' --exclude='*.tgz' --exclude='*.gz' ~/Webworks/ /media/alec/storage/Webworks
+printf "\nDone syncing Webworks.\nNow sync ahillio_labs.\n"
+
+rsync -avr --exclude='*.sql' --exclude='*.tgz' --exclude='*.gz' /home/alec/ahillio_labs/ /media/alec/storage/ahillio_labs
+printf "\nDone syncing ahillio_labs.\nNow sync Documents.\n"
+
+rsync -avr --exclude='*.sql' --exclude='*.tgz' --exclude='*.gz' /home/alec/Documents/ /media/alec/storage/Documents
+printf "\nDone syncing documents.\nNow sync pictures.\n"
+
+#rsync -avr --exclude='*.sql' --exclude='*.tgz' --exclude='*.gz' --ignore-existing /home/alec/Pictures/ /media/alec/storage/Pictures/laptop-sync
+#printf "\nDone syncing pictures.\n"
+printf "Nothing else to sync, backup complete.\n"
+
+# printf "Copy /var/www."
+# tar -czvf /media/alec/storage/www.tgz /var/www
+# printf "Extract www."
+# cd /media/alec/storage
+# tar -xvf www.tgz
 
