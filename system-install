@@ -46,13 +46,22 @@ sudo a2enmod mpm_prefork
 # end of threading hack
 sudo apt-get install php-pear
 sudp apt-get install php-dev
+sudo echo '; ahillio custom config:' >> /etc/php/7.???/apache2/php.ini
 sudo pecl install xdebug
 find /usr -name 'xdebug.so' #returns: /usr/lib/php/20151012/xdebug.so
 sudo echo 'zend_extension="/usr/lib/php/20151012/xdebug.so"' >> /etc/php/7.0/apache2/php.ini
-sudo echo 'xdebug.idekey="PHPSTORM"' >> /etc/php/7.0/apache2/php.ini
+sudo echo 'xdebug.idekey="xdebug"' >> /etc/php/7.0/apache2/php.ini
+sudo echo 'xdebug.remote_enable=on' >> /etc/php/7.0/apache2/php.ini
+sudo echo 'xdebug.remote_handler=dbgp' >> /etc/php/7.0/apache2/php.ini
+sudo echo 'xdebug.remote_host=localhost' >> /etc/php/7.0/apache2/php.ini
+sudo echo 'xdebug.remote_port=9000' >> /etc/php/7.0/apache2/php.ini
 # and configure chromium xdebug extension to use PHPSTORM ide key
 sudo vi /etc/apache2/apache2.conf && s/None/All for AllowOverride in the /var/www directory.
 #? sudo echo 'ServerName 127.0.0.1' >> /etc/apache2/apache2.conf
+
+sudo apt-get install sendmail
+sudo sendmailconfig // and choose yes for each prompt
+
 sudo service apache2 restart
 
 wget https://git.io/psysh
