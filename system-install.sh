@@ -72,6 +72,20 @@ sudo vi /etc/apache2/apache2.conf && s/None/All for AllowOverride in the /var/ww
 # apt-get install postfix
 # ssmtp is sufficient for local dev
 sudo apt-get install ssmtp
+# configure ssmtp:
+sudo vi /etc/ssmtp/ssmtp.conf
+# add the following:
+#root=accounts@ahill.io
+#mailhub=smtp.sendgrid.net:587
+#rewriteDomain=
+#UseTLS=YESUseSTARTTLS=YES
+#AuthUser=ahillio
+#AuthPass=<enter password here>
+#FromLineOverride=YES
+sudo vi /etc/ssmtp/revaliases
+# add the following:
+#root:accounts@ahill.io:smtp.sendgrid.net:587
+#alec:accounts@ahill.io:smtp.sendgrid.net:587
 
 sudo service apache2 restart
 
