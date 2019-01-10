@@ -86,6 +86,11 @@ sudo vi /etc/ssmtp/revaliases
 # add the following:
 #root:accounts@ahill.io:smtp.sendgrid.net:587
 #alec:accounts@ahill.io:smtp.sendgrid.net:587
+# to test ssmtp:
+ssmtp -v web@ahill.io
+# then after hitting enter you'll get a blank line
+# type some text to send via email
+# then hit [Ctrl]+[D]
 
 sudo service apache2 restart
 
