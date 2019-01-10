@@ -26,6 +26,13 @@ sudo apt-get install ack-grep
 
 apt-get install vim-gtk
 
+# requirements for youcompleteme vim plugin:
+sudo apt install build-essential cmake python3-dev
+git clone youcompleteme #into ~/.vim/bundle
+cd youcompleteme
+git submodule update --init --recursive
+python3 install.py
+
 apt-get install ctags
 
 apt-get install tree
@@ -57,10 +64,14 @@ sudo echo 'xdebug.remote_host=localhost' >> /etc/php/7.0/apache2/php.ini
 sudo echo 'xdebug.remote_port=9000' >> /etc/php/7.0/apache2/php.ini
 # and configure chromium xdebug extension to use PHPSTORM ide key
 sudo vi /etc/apache2/apache2.conf && s/None/All for AllowOverride in the /var/www directory.
-#? sudo echo 'ServerName 127.0.0.1' >> /etc/apache2/apache2.conf
 
-sudo apt-get install sendmail
-sudo sendmailconfig // and choose yes for each prompt
+#? sudo echo 'ServerName 127.0.0.1' >> /etc/apache2/apache2.conf
+# sendmail and postfix are for production servers
+# sudo apt-get install sendmail
+# sudo sendmailconfig // and choose yes for each prompt
+# apt-get install postfix
+# ssmtp is sufficient for local dev
+sudo apt-get install ssmtp
 
 sudo service apache2 restart
 
@@ -100,7 +111,7 @@ pip install Pygments
 
 apt-get install chromium-browser gimp inkscape scribus libreoffice
 sudo apt-get install
- - & then go and modify the [Print] key to use shutter for full-screen shot
+# - & then go and modify the [Print] key to use shutter for full-screen shot
 
 # following lines might be no good
 # the SHA might change
