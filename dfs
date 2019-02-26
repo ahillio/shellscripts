@@ -2,14 +2,35 @@
 # dfs = drush features-status
 # give us info about a given feature module
 
-# give us module info
-drush pmi $1
+# if [ $# -eq 0 ]; then
+# semicolon needed after ; only on command line where there is no end of line character
+if [ $# -eq 0 ]
+then
+  printf "What module would you like to inspect?\n"
+  # at least one argument, the module name, must be provided
+  exit 64
+fi
 
-# list the components used by feature module
-drush fc \% | grep $1
+drush-features-status () {
+  # give us module info
+  drush pmi $1
 
-# insert blank line for readability
-printf "\n"
+  # list the components used by feature module
+  drush fc \% | grep $1
 
-# show changes between module and database
-drush fd $1
+  # insert blank line for readability
+  printf "\n"
+
+  # show changes between module and database
+  drush fd $1
+}
+
+if [ $# -eq 1 ]
+# if only one argument is provided use less
+then
+  drush-features-status $1 | less
+elif [ $# -eq 2 ]
+# if two arguments are provided write to file
+then
+  drush-features-status $1 > $2
+fi
