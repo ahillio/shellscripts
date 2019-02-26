@@ -1,0 +1,25 @@
+# Ignore paths that contain user-generated content.
+docroot/files
+docroot/sites/*/files
+docroot/sites/*/private
+
+# Ignore notes and utilities
+drush
+bin
+notes
+docroot/tags
+
+# Ignore backups
+*.sql
+*.sql.gz
+*.tar
+*.tgz
+*.tar.gz
+
+# Ignore vim temp files
+*.swp
+*.swo
+*~
+
+# Ignore logs
+*.log
