@@ -8,7 +8,7 @@
 
 export HISTFILE=~/.zsh_history
 fc -R
-fc -l | tail -n 2 | sed 's/  [0-9]*  //' | sed 's/yh//' | tr -d '\n' | xclip -selection c
+fc -l | tail -n 2 | sed 's/[0-9]*  //' | sed 's/  [0-9]*  //' | sed 's/yh//' | tr -d '\n' | xclip -selection c
 # fc = file compare, not sure why it's needed
 # tail -n 2 = gets last two lines of histroy file (even though history file's not supplied as a parameter - how does that work?)
 # sed1 = remove number from beginning of line
