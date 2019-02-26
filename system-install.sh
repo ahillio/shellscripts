@@ -116,6 +116,7 @@ pip install Pygments
     - drupal console
 - mysql
 - adminer
+    # access it via http://localhost/adminer.php
     - sudo mkdir /usr/share/adminer
     # should retreive from git instead?
     - sudo wget "http://www.adminer.org/latest.php" -O /usr/share/adminer/latest.php
