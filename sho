@@ -1,0 +1,12 @@
+#! /bin/bash
+# sho
+# shows output of command, refreshing it every second
+
+set -e
+
+###showItToUs () {
+###  watch -n 1 -c "$1"
+###}
+###showItToUs()
+
+watch -n 1 -c "$1"
