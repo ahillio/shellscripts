@@ -1,0 +1,5 @@
+#!/bin/bash
+# simple script for printing instructions
+# since tools like `print` and `echo` and `cat` break up words when wrapping text to the next line, lets measure the column width of the terminal window and then use `fold` to wrap lines neatly according to spaces between words.
+
+cols=$(tput cols) && echo "$1" | fold -w $cols -s

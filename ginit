@@ -1,0 +1,6 @@
+#!/bin/bash
+
+git init
+echo "*~\n*.swp\n*.tmp" > .gitignore
+git add .gitignore
+git commit -m "Begin."

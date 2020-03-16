@@ -1,0 +1,8 @@
+#!/bin/bash
+# list files, since `ls` doesn't provide a flag/option for this
+
+if [ $# -eq 0 ]; then
+  find -maxdepth 1 -type f | sed 's/\.\///g' | sed '/^\./d' | sort
+else
+  find $1 -maxdepth 1 -type f | sed '/\/\./d' | sed "s|$1/||" | sort
+fi
