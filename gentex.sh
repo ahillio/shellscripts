@@ -9,7 +9,7 @@ for file in $phpfiles; do
     echo "$file.tex exists already.  Now creating pdf file..."
     pdflatex --shell-escape $file.tex
   else
-    cp template.tex $file.tex
+    cp ~/bin/inc/template.tex $file.tex
     sed -i "s/example/$file/" $file.tex
     pdflatex --shell-escape $file.tex
   fi
