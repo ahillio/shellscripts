@@ -9,6 +9,8 @@ cd
 git clone git@github.com:ahillio/dotfiles.git
 ln -s dotfiles/.xinitrc .xinitrc
 
+sudo apt-get install inotify-tools
+
 sudo apt-get install httpie
 sudo apt-get install curl
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
@@ -28,10 +30,15 @@ apt-get install vim-gtk
 
 # requirements for youcompleteme vim plugin:
 sudo apt install build-essential cmake python3-dev
+#note there might be better way to install python3... `python3-dev` may not be needed as we're on super old python3, using `pyenv` allows for python version management
 git clone youcompleteme #into ~/.vim/bundle
 cd youcompleteme
 git submodule update --init --recursive
 python3 install.py
+
+# @todo
+# install `pyenv` for python version management
+# https://github.com/pyenv/pyenv
 
 apt-get install ctags
 
@@ -63,7 +70,47 @@ sudo echo 'xdebug.remote_handler=dbgp' >> /etc/php/7.0/apache2/php.ini
 sudo echo 'xdebug.remote_host=localhost' >> /etc/php/7.0/apache2/php.ini
 sudo echo 'xdebug.remote_port=9000' >> /etc/php/7.0/apache2/php.ini
 # and configure chromium xdebug extension to use PHPSTORM ide key
-sudo vi /etc/apache2/apache2.conf && s/None/All for AllowOverride in the /var/www directory.
+sudo vi /etc/apache2/apache2.conf &then s/None/All for AllowOverride in the /var/www directory.
+sudo usermod -a -G www-data alec
+
+####################
+### Install DDEV ###
+
+curl -L https://raw.githubusercontent.com/drud/ddev/master/scripts/install_ddev.sh | bash
+# needed for mkcert i think
+sudo apt install libnss3-tools
+# mkcert for local ssl - get binary file from https://github.com/FiloSottile/mkcert/releases
+wget https://github.com/FiloSottile/mkcert/releases/download/v1.4.1/mkcert-v1.4.1-linux-amd64 && mv mkcert-v1.4.1-linux-amd64 ~/bin/mkcert && chmod +x ~/bin/mkcert
+mkcert -install
+# composer steps:
+sudo apt-get install \
+  apt-transport-https \
+  ca-certificates \
+  curl \
+  gnupg-agent \
+  software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo apt-key fingerprint 0EBFCD88
+# verify fingerprint https://docs.docker.com/install/linux/docker-ce/ubuntu/
+# using $(lsb_release) with Linux Mint does not work
+# sudo add-apt-repository \
+#   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+#   $(lsb_release -cs) \
+#   stable"
+# with Mint, use "Xenial" instead :/
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable"
+wget https://github.com/docker/compose/releases/download/1.25.1/docker-compose-Linux-x86_64
+sudo chmod +x docker-compose-Linux-x86_64
+sudo mv docker-compose-Linux-x86_64 /usr/local/bin/docker-compose
+
+sudo groupadd docker
+sudo usermod -aG docker $USER
+# then log out & back in for new group to be applied.
+# or do:
+newgrp docker
+
+### end DDEV ###
+################
 
 #? sudo echo 'ServerName 127.0.0.1' >> /etc/apache2/apache2.conf
 # sendmail and postfix are for production servers
@@ -103,10 +150,17 @@ sudo mv php_manual.sqlite /usr/local/share/psysh
 
 sudo apt-get install texlive-latex-base texlive-fonts-recommended texlive-fonts-extra python-pygments texlive-latex-extra texlive-extra-utils
 sudo apt-get install python-pip 
+pip install --upgrade pip #???
 pip install Pygments
+apt-get install python-setuptools python3-setuptools
+pip3 install pygments-style-solarized
+
+curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+sudo apt-get install nodejs
+sudo npm install -g nodejs/repl
+
 
 @todo install
-- nodejs
 - gulp
 - sass
 - php: install & configure
@@ -161,3 +215,15 @@ composer global require drush/drush ##doesn't work :(
 sudo gem install tmuxinator
 
 sudo apt-get install imagemagick
+
+# install nvm to manage nodejs versions
+# nvm needs some config in .zshrc to work
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
+nvm install node
+npm install gulp-cli -g
+
+sudo pip3 install asciinema # or with `-H`?
+sudo -H pip3 install asciinema
+
+#awesome mysql cli :)
+pip3 install -U mycli
