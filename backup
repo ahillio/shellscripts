@@ -15,23 +15,21 @@ set -e
 #printf "Done syncing www.\nNow sync accounting."
 
 # ACCOUNTING
-rsync -avvr --exclude='*.sql' --exclude='*.tgz' --exclude='*.gz' /home/alec/accounting/ /media/alec/storage/accounting
-printf "\nDone syncing accounting.\nNow sync Webworks.\n"
+#rsync -avvr --exclude='*.sql' --exclude='*.tgz' --exclude='*.gz' --exclude='*.zip' /home/alec/accounting/ /media/alec/storage/accounting
+printf "\nNow sync Webworks...\n"
 
 # WORK
 # rsync -avvr /home/alec/Webworks/ /media/alec/storage/Webworks
-rsync -avvrz --exclude='*.sql' --exclude='*.tgz' --exclude='*.gz' ~/Webworks/ /media/alec/storage/Webworks
-printf "\nDone syncing Webworks.\nNow sync ahillio_labs.\n"
-
-# LABS
-rsync -avvr --exclude='*.sql' --exclude='*.tgz' --exclude='*.gz' /home/alec/ahillio_labs/ /media/alec/storage/ahillio_labs
-printf "\nDone syncing ahillio_labs.\nNow sync Documents.\n"
+rsync -avvrz --exclude='*.sql' --exclude='*.tgz' --exclude='*.gz' --exclude='*.zip' ~/Work/ /media/alec/storage/Work
+printf "\nDone syncing Works.\nNow sync Documents...\n"
 
 # DOCUMENTS
-rsync -avvr --exclude='*.sql' --exclude='*.tgz' --exclude='*.gz' /home/alec/Documents/ /media/alec/storage/Documents
-printf "\nDone syncing documents.\nNow sync pictures.\n"
+rsync -avvr --exclude='*.sql' --exclude='*.tgz' --exclude='*.gz' --exclude='*.zip' /home/alec/Documents/ /media/alec/storage/Documents
+printf "\nDone syncing documents.\n"
 
-#rsync -avvr --exclude='*.sql' --exclude='*.tgz' --exclude='*.gz' --ignore-existing /home/alec/Pictures/ /media/alec/storage/Pictures/laptop-sync
+rsync -avvr --exclude='*.sql' --exclude='*.tgz' --exclude='*.gz' --exclude='*.zip' /home/alec/www/ /media/alec/storage/www
+
+#rsync -avvr --exclude='*.sql' --exclude='*.tgz' --exclude='*.gz' --exclude='*.zip' --ignore-existing /home/alec/Pictures/ /media/alec/storage/Pictures/laptop-sync
 #printf "\nDone syncing pictures.\n"
 printf "Nothing else to sync, backup complete.\n"
 
@@ -41,5 +39,5 @@ printf "Nothing else to sync, backup complete.\n"
 # cd /media/alec/storage
 # tar -xvf www.tgz
 
-#rsync -avvzP --exclude='*.sql' --exclude='*.tgz' --exclude='*.tar' --exclude='*.gz' --exclude='*.zip' /home/alec/Work/Clients /media/alec/storage/Webworks/Clients
+#rsync -avvzP --exclude='*.sql' --exclude='*.tgz' --exclude='*.tar' --exclude='*.gz' --exclude='*.zip' --exclude='*.zip' /home/alec/Work/Clients /media/alec/storage/Webworks/Clients
 
