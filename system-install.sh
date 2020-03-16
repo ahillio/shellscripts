@@ -227,3 +227,13 @@ sudo -H pip3 install asciinema
 
 #awesome mysql cli :)
 pip3 install -U mycli
+
+### CREATE SYMLINKS FOR DOTFILES ###
+.gitconfig
+.myclirc
+.vim
+.tmux.conf
+.drush
+.zshrc
+.vimrc
+.xinitrc
