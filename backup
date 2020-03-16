@@ -4,26 +4,34 @@
 # set -eo pipefail ...why does that not work?
 set -e
 
-printf "Begin syncing www."
-# rsync takes so damn long
+# @todo why does rsync takes so damn long?
+# @doc
+# rsync -avvr source destination
+# -a  archive mode
+# -vv show verbose information about file transfers and skips
 
-#rsync -avr ~/www/ /media/alec/storage/www
+#printf "Begin syncing www."
+#rsync -avvr ~/www/ /media/alec/storage/www
 #printf "Done syncing www.\nNow sync accounting."
 
-rsync -avr --exclude='*.sql' --exclude='*.tgz' --exclude='*.gz' /home/alec/accounting/ /media/alec/storage/accounting
+# ACCOUNTING
+rsync -avvr --exclude='*.sql' --exclude='*.tgz' --exclude='*.gz' /home/alec/accounting/ /media/alec/storage/accounting
 printf "\nDone syncing accounting.\nNow sync Webworks.\n"
 
-# rsync -avr /home/alec/Webworks/ /media/alec/storage/Webworks
-rsync -avrz --exclude='*.sql' --exclude='*.tgz' --exclude='*.gz' ~/Webworks/ /media/alec/storage/Webworks
+# WORK
+# rsync -avvr /home/alec/Webworks/ /media/alec/storage/Webworks
+rsync -avvrz --exclude='*.sql' --exclude='*.tgz' --exclude='*.gz' ~/Webworks/ /media/alec/storage/Webworks
 printf "\nDone syncing Webworks.\nNow sync ahillio_labs.\n"
 
-rsync -avr --exclude='*.sql' --exclude='*.tgz' --exclude='*.gz' /home/alec/ahillio_labs/ /media/alec/storage/ahillio_labs
+# LABS
+rsync -avvr --exclude='*.sql' --exclude='*.tgz' --exclude='*.gz' /home/alec/ahillio_labs/ /media/alec/storage/ahillio_labs
 printf "\nDone syncing ahillio_labs.\nNow sync Documents.\n"
 
-rsync -avr --exclude='*.sql' --exclude='*.tgz' --exclude='*.gz' /home/alec/Documents/ /media/alec/storage/Documents
+# DOCUMENTS
+rsync -avvr --exclude='*.sql' --exclude='*.tgz' --exclude='*.gz' /home/alec/Documents/ /media/alec/storage/Documents
 printf "\nDone syncing documents.\nNow sync pictures.\n"
 
-#rsync -avr --exclude='*.sql' --exclude='*.tgz' --exclude='*.gz' --ignore-existing /home/alec/Pictures/ /media/alec/storage/Pictures/laptop-sync
+#rsync -avvr --exclude='*.sql' --exclude='*.tgz' --exclude='*.gz' --ignore-existing /home/alec/Pictures/ /media/alec/storage/Pictures/laptop-sync
 #printf "\nDone syncing pictures.\n"
 printf "Nothing else to sync, backup complete.\n"
 
@@ -32,4 +40,6 @@ printf "Nothing else to sync, backup complete.\n"
 # printf "Extract www."
 # cd /media/alec/storage
 # tar -xvf www.tgz
+
+#rsync -avvzP --exclude='*.sql' --exclude='*.tgz' --exclude='*.tar' --exclude='*.gz' --exclude='*.zip' /home/alec/Work/Clients /media/alec/storage/Webworks/Clients
 
