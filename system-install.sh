@@ -1,6 +1,32 @@
 apt-get update
 apt-get upgrade
 apt-get install git gcc make pkg-config libx11-dev libxtst-dev libxi-dev
+
+########################
+### enhance keyboard ###
+###  using caps2esc  ###
+
+sudo apt-get install cmake libyaml-cpp-dev build-essential libudev-dev libevdev-dev
+#note libevdev is required.  On the package on Fedora is called `libevdev-devel`.  `libevdev` is not available and `libevdev2` is already installed (but doesn't provide libudev.h file) and a `libevdev-dev` is available but websearch reveals that `libudev-dev` contains the libudev.h file which makes sense.  After installing libudev-dev, libevdev.h file is missing.
+cd bin 
+git clone git@gitlab.com:interception/linux/tools.git
+cd tools && mkdir build && cd build
+cmake ..
+make
+#sudo mv -t /usr/bin intercept udevmon uinput
+sudo make install
+cd ../..
+git clone git@gitlab.com:interception/linux/plugins/caps2esc.git
+cd caps2esc && mkdir build && cdbuild
+cmake ..
+make
+#sudo mv caps2esc /usr/bin/
+sudo make install
+#then create/edit some config files according to steps 3,4,5 at https://askubuntu.com/questions/979359/how-do-i-install-caps2esc
+
+##### end caps2esc #####
+########################
+
 sudo apt-get install tig
 git clone https://github.com/alols/xcape.git && xcape
 make
@@ -30,15 +56,15 @@ apt-get install vim-gtk
 
 # requirements for youcompleteme vim plugin:
 sudo apt install build-essential cmake python3-dev
-#note there might be better way to install python3... `python3-dev` may not be needed as we're on super old python3, using `pyenv` allows for python version management
+# note there might be better way to install python3... `python3-dev` may not be needed as we're on super old python3
+# @todo
+# possibly use `pyenv` for python version management https://github.com/pyenv/pyenv
+# https://realpython.com/intro-to-pyenv/
+# https://github.com/pyenv/pyenv/issues/1054
 git clone youcompleteme #into ~/.vim/bundle
 cd youcompleteme
 git submodule update --init --recursive
 python3 install.py
-
-# @todo
-# install `pyenv` for python version management
-# https://github.com/pyenv/pyenv
 
 apt-get install ctags
 
@@ -149,6 +175,7 @@ sudo mkdir /usr/local/share/psysh
 sudo mv php_manual.sqlite /usr/local/share/psysh
 
 sudo apt-get install texlive-latex-base texlive-fonts-recommended texlive-fonts-extra python-pygments texlive-latex-extra texlive-extra-utils
+# re: pip.... see yenv?
 sudo apt-get install python-pip 
 pip install --upgrade pip #???
 pip install Pygments
@@ -181,7 +208,7 @@ sudo npm install -g nodejs/repl
     # when wanting to update:
     # sudo wget "http://www.adminer.org/latest.php" -O /usr/share/adminer/latest.php
     # per: https://www.leaseweb.com/labs/2014/06/install-adminer-manually-ubuntu-14-04/
-- xclip
+sudo apt-get install xclip
 
 apt-get install chromium-browser gimp inkscape scribus libreoffice
 sudo apt-get install
@@ -237,3 +264,6 @@ pip3 install -U mycli
 .zshrc
 .vimrc
 .xinitrc
+
+sudo snap install spotify
+sudo snap install chromium
