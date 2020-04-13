@@ -76,6 +76,8 @@ python3 install.py
 apt-get install ctags #TODO:
 # use universal ctags instead
 # https://github.com/universal-ctags/ctags
+# sudo apt-get install universal-ctags
+# but vim-easytags plugin has some buggy incompatability with universal-ctags and grumpily prefers exuberance-ctags
 
 
 cd ~/bin && git clone https://github.com/rupa/z && rm -rf z/.git
@@ -282,7 +284,4 @@ sudo apt-get install irssi #irc client for terminal
 sudo pip3 install tasklib
 
 pip3 install vit
-
-
-sudo apt-get install universal-ctags
 
