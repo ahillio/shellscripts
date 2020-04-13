@@ -1,3 +1,5 @@
+#!/bin/bash
+
 apt-get update
 apt-get upgrade
 apt-get install git gcc make pkg-config libx11-dev libxtst-dev libxi-dev
@@ -27,23 +29,21 @@ sudo make install
 ##### end caps2esc #####
 ########################
 
+
+sudo apt-get install xclip
+sudo apt-get install gimp inkscape scribus
 sudo apt-get install tig
-git clone https://github.com/alols/xcape.git && xcape
-make
-make install
-cd
-git clone git@github.com:ahillio/dotfiles.git
-ln -s dotfiles/.xinitrc .xinitrc
+apt-get install tree peco
 
-sudo apt-get install inotify-tools
-
-sudo apt-get install httpie
-sudo apt-get install curl
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+sudo apt-get install inotify-tools httpie curl
 apt-get install zsh
 chsh -s /bin/zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 # reboot computer for shell to change
+sudo apt-get install fonts-powerline
 git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
+
+#git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
 ln -s dotfiles/.zshrc .zshrc
 
 apt-get install tmux
@@ -52,29 +52,36 @@ sudo gem install tmuxinator
 
 sudo apt-get install ack-grep
 
-apt-get install vim-gtk
+apt-get install vim-gtk3
+# @TODO vim solution for viewing csv files in tabular layout such as https://github.com/dhruvasagar/vim-table-mode
+# @TODO install XSV tool for csv manipulation https://github.com/BurntSushi/xsv
 
 # requirements for youcompleteme vim plugin:
-sudo apt install build-essential cmake python3-dev
+sudo apt install build-essential cmake #note: "dev" is scarry :endnote# python3-dev
 # note there might be better way to install python3... `python3-dev` may not be needed as we're on super old python3
-# @todo
+
+# @TODO (possibly)
+# use https://github.com/asdf-vm/asdf
+# for **extendable** version management replacing nvm, pyenv, etc
 # possibly use `pyenv` for python version management https://github.com/pyenv/pyenv
 # https://realpython.com/intro-to-pyenv/
 # https://github.com/pyenv/pyenv/issues/1054
+
 git clone youcompleteme #into ~/.vim/bundle
 cd youcompleteme
 git submodule update --init --recursive
 python3 install.py
+# @TODO does vim have tagbar plugin?
 
-apt-get install ctags
+apt-get install ctags #TODO:
+# use universal ctags instead
+# https://github.com/universal-ctags/ctags
 
-apt-get install tree
-
-wget https://github.com/peco/peco/releases/download/v0.5.3/peco_linux_amd64.tar.gz
-tar -xvf peco_linux_amd64.tar.gz
-mv peco_linux_amd64/peco bin
 
 cd ~/bin && git clone https://github.com/rupa/z && rm -rf z/.git
+
+########################
+### Handbuild Server ###
 
 sudo apt-get install php php-xml libapache2-mod-php7.0 php7.0-sqlite3 php-mysql php-gd php-curl php-mbstring php-zip
 sudo apt-get install mysql-server
@@ -96,8 +103,46 @@ sudo echo 'xdebug.remote_handler=dbgp' >> /etc/php/7.0/apache2/php.ini
 sudo echo 'xdebug.remote_host=localhost' >> /etc/php/7.0/apache2/php.ini
 sudo echo 'xdebug.remote_port=9000' >> /etc/php/7.0/apache2/php.ini
 # and configure chromium xdebug extension to use PHPSTORM ide key
-sudo vi /etc/apache2/apache2.conf &then s/None/All for AllowOverride in the /var/www directory.
+sudo vi /etc/apache2/apache2.conf # &then s/None/All for AllowOverride in the /var/www directory.
 sudo usermod -a -G www-data alec
+
+#? sudo echo 'ServerName 127.0.0.1' >> /etc/apache2/apache2.conf
+# sendmail and postfix are for production servers
+# sudo apt-get install sendmail
+# sudo sendmailconfig // and choose yes for each prompt
+# apt-get install postfix
+# ssmtp is sufficient for local dev
+sudo apt-get install ssmtp
+# configure ssmtp:
+sudo vi /etc/ssmtp/ssmtp.conf
+# add the following:
+#root=accounts@ahill.io
+#mailhub=smtp.sendgrid.net:587
+#rewriteDomain=
+#UseTLS=YESUseSTARTTLS=YES
+#AuthUser=ahillio
+#AuthPass=<enter password here>
+#FromLineOverride=YES
+sudo vi /etc/ssmtp/revaliases
+# add the following:
+#root:accounts@ahill.io:smtp.sendgrid.net:587
+#alec:accounts@ahill.io:smtp.sendgrid.net:587
+# to test ssmtp:
+ssmtp -v web@ahill.io
+# then after hitting enter you'll get a blank line
+# type some text to send via email
+# then hit [Ctrl]+[D]
+
+sudo service apache2 restart
+
+wget https://git.io/psysh && chmod +x psysh && sudo mv psysh /usr/local/bin/
+wget http://psysh.org/manual/en/php_manual.sqlite
+sudo mkdir /usr/local/share/psysh
+sudo mv php_manual.sqlite /usr/local/share/psysh
+
+
+### End Handbuilt Server ###
+############################
 
 ####################
 ### Install DDEV ###
@@ -138,45 +183,11 @@ newgrp docker
 ### end DDEV ###
 ################
 
-#? sudo echo 'ServerName 127.0.0.1' >> /etc/apache2/apache2.conf
-# sendmail and postfix are for production servers
-# sudo apt-get install sendmail
-# sudo sendmailconfig // and choose yes for each prompt
-# apt-get install postfix
-# ssmtp is sufficient for local dev
-sudo apt-get install ssmtp
-# configure ssmtp:
-sudo vi /etc/ssmtp/ssmtp.conf
-# add the following:
-#root=accounts@ahill.io
-#mailhub=smtp.sendgrid.net:587
-#rewriteDomain=
-#UseTLS=YESUseSTARTTLS=YES
-#AuthUser=ahillio
-#AuthPass=<enter password here>
-#FromLineOverride=YES
-sudo vi /etc/ssmtp/revaliases
-# add the following:
-#root:accounts@ahill.io:smtp.sendgrid.net:587
-#alec:accounts@ahill.io:smtp.sendgrid.net:587
-# to test ssmtp:
-ssmtp -v web@ahill.io
-# then after hitting enter you'll get a blank line
-# type some text to send via email
-# then hit [Ctrl]+[D]
 
-sudo service apache2 restart
-
-wget https://git.io/psysh
-chmod +x psysh
-sudo mv psysh /usr/local/bin/
-wget http://psysh.org/manual/en/php_manual.sqlite
-sudo mkdir /usr/local/share/psysh
-sudo mv php_manual.sqlite /usr/local/share/psysh
 
 sudo apt-get install texlive-latex-base texlive-fonts-recommended texlive-fonts-extra python-pygments texlive-latex-extra texlive-extra-utils
 # re: pip.... see yenv?
-sudo apt-get install python-pip 
+sudo apt-get install python-pip python3-pip
 pip install --upgrade pip #???
 pip install Pygments
 apt-get install python-setuptools python3-setuptools
@@ -187,16 +198,10 @@ sudo apt-get install nodejs
 sudo npm install -g nodejs/repl
 
 
-@todo install
-- gulp
-- sass
-- php: install & configure
-    - xdebug
-    - composer
-    - drush
-    - drupal console
-- mysql
-- adminer
+# @TODO install
+# - gulp
+# - sass
+# - adminer
     # access it via http://localhost/adminer.php
     - sudo mkdir /usr/share/adminer
     # should retreive from git instead?
@@ -208,9 +213,6 @@ sudo npm install -g nodejs/repl
     # when wanting to update:
     # sudo wget "http://www.adminer.org/latest.php" -O /usr/share/adminer/latest.php
     # per: https://www.leaseweb.com/labs/2014/06/install-adminer-manually-ubuntu-14-04/
-sudo apt-get install xclip
-
-apt-get install chromium-browser gimp inkscape scribus libreoffice
 sudo apt-get install
 # - & then go and modify the [Print] key to use shutter for full-screen shot
 
@@ -223,21 +225,13 @@ php -r "if (hash_file('SHA384', 'composer-setup.php') === '544e09ee996cdf60ece38
 php composer-setup.php
 sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 
-wget https://github.com/drush-ops/drush/releases/download/8.1.15/drush.phar
+wget https://github.com/drush-ops/drush/releases/download/8.3.2/drush.phar
 chmod +x drush.phar
 sudo mv drush.phar /usr/local/bin/drush
 # option: enrich bash startup file with completion and aliases
 # drush init
 
 ---
-
-php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-php -r "if (hash_file('SHA384', 'composer-setup.php') === '544e09ee996cdf60ece3804abc52599c22b1f40f4323403c44d44fdfdd586475ca9813a858088ffbc1f233e9b180f061') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
-php composer-setup.php
-php -r "unlink('composer-setup.php');"
-sudo mv composer.phar /usr/local/bin/composer
-echo 'export PATH="$HOME/.composer/vendor/bin:$PATH"' >> .zshrc
-composer global require drush/drush ##doesn't work :(
 
 sudo gem install tmuxinator
 
@@ -267,3 +261,28 @@ pip3 install -U mycli
 
 sudo snap install spotify
 sudo snap install chromium
+
+sudo apt-get install taskwarrior
+sudo apt-get install timewarrior
+cp /usr/share/doc/timewarrior/ext/on-modify.timewarrior ~/.task/hooks/
+chmod +x ~/.task/hooks/on-modify.timewarrior
+# get task hook script for watson too, not sure how these will be versioned, I guess in ~/.dotfiles would make sense more so than ~/bin
+pip install timew-report #required for certain timewarrior extension
+pip3 install td-watson
+
+sudo apt-get install pass
+pip install upass
+
+sudo apt-get install irssi #irc client for terminal
+
+#===============
+# Dumping Ground:
+#===============
+
+sudo pip3 install tasklib
+
+pip3 install vit
+
+
+sudo apt-get install universal-ctags
+
