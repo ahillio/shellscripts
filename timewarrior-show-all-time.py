@@ -1,5 +1,6 @@
 #!/usr/bin/python
 import sys
+#import datetime
 from timewreport.parser import TimeWarriorParser
 
 parser = TimeWarriorParser(sys.stdin)
@@ -33,11 +34,12 @@ print('{} {}'.format('-' * max_width, '----------'))
 # Compose table rows.
 grand_total = 0
 for tag in sorted(totals):
-    formatted = totals[tag].seconds
+    formatted = totals[tag]
     grand_total += totals[tag].seconds
     print('{:{width}} {:10}'.format(tag, formatted, width=max_width))
 
-# Compose total.
-print('{} {}'.format(' ' * max_width, '----------'))
-print('{:{width}} {:10}'.format('Total', grand_total, width=max_width))
+## Compose total.
+#print('{} {}'.format(' ' * max_width, '----------'))
+#grand_total = datetime.timedelta(seconds=grand_total)
+#print('{:{width}} {:10}'.format('Total', grand_total, width=max_width))
 
