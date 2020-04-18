@@ -112,6 +112,7 @@ $SHELL -c "$EDITOR $file"
 
 # Create a note message representing the first line of
 # the edited note file.
+# @TODO: don't use annotations.  Use an `UDA` because it can have a `marker` associated with it for easy visual indication of notefile's existence inside `vit` reports
 if [ -f $file ]; then
   NOTEMSG="[tasknote] `head -1 $file`"
   # remove any previous annotation - we want only a single

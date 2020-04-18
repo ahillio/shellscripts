@@ -1,0 +1,2 @@
+#!/bin/bash
+PANE=$(echo $TMUX_PANE | sed 's/%//') && NEXT=$((PANE+1)) && echo $NEXT

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+echo "straight grep | sed | sort:"
+grep -o 'project:".*" ' .task/pending.data | sed 's/^.*"\(.*\)" status.*$/\1/' | sort -u
+
+printf "\n"
+
+PROJECTS=$(grep -o 'project:".*" ' .task/pending.data | sed 's/^.*"\(.*\)" status.*$/\1/' | sort -u)
+echo "echoing a quoted \$PROJECTS:"
+echo "$PROJECTS"
+printf "\n"
+echo "echoing \$PROJECTS without quotes:"
+echo $PROJECTS
