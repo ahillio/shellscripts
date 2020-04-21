@@ -57,18 +57,20 @@ VIEWER=cat
 FOLDER="~/.task/notes/"
 
 # Check for existence of $FOLDER
-if [ ! -d $FOLDER ]; then
-	echo    "Notes folder '$FOLDER' does not exist."
-	echo -n "Shall I create it (y/n)? "
-	read answer
-	if [ $answer == "y" ]; then
-	  echo "Creating '$FOLDER'."
-	  mkdir -p $FOLDER;
-	else
-	  echo "Did NOT create $FOLDER. Exiting."
-	  exit 1;
-	fi
-fi
+# @WTF (WTF should have syntax highlighting ;)
+# @TODO: Why does this script fail to detect existing notes dir?  It routinely says one doesn't exist and asks to create it.  Scary since notes aren't in git yet!
+# if [ ! -d $FOLDER ]; then
+# 	echo    "Notes folder '$FOLDER' does not exist."
+# 	echo -n "Shall I create it (y/n)? "
+# 	read answer
+# 	if [ $answer == "y" ]; then
+# 	  echo "Creating '$FOLDER'."
+# 	  mkdir -p $FOLDER;
+# 	else
+# 	  echo "Did NOT create $FOLDER. Exiting."
+# 	  exit 1;
+# 	fi
+# fi
 
 # @TODO: Set your preferred extension for tasknotes
 EXT=".mkd"
