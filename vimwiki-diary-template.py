@@ -20,10 +20,13 @@ template = """# {date}
 
 - [ ] do Work
 
-- [ ] deeply relax at some point
+- [ ] body self care
+- [ ] meditate
+- [ ] deeply relax (other than meditation)
 
 - [ ] make a bead
 - [ ] journal (using vimwiki diary)
+- [ ] go to bed on time | 
 
 ## Todo
 
