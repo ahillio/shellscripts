@@ -251,6 +251,9 @@ sudo -H pip3 install asciinema
 #awesome mysql cli :)
 pip3 install -U mycli
 
+# improved python repl
+pip install ptpython
+
 ### CREATE SYMLINKS FOR DOTFILES ###
 .gitconfig
 .myclirc

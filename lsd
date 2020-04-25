@@ -5,4 +5,5 @@ if [ $# -eq 0 ]; then
   find -maxdepth 1 -type d | sed 's/\.\///g' | sed '/^\./d' | sort
 else
   find $1 -maxdepth 1 -type d | sed '/\/\./d' | sed "s|$1/||" | sort
+  #@TODO: `sed '/\/\./d'` breaks when looking inside a hidden directory like `~/.dotfiles`.
 fi
