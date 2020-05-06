@@ -3,6 +3,7 @@ import sys
 import datetime
 
 # note VimwikiDiaryGenerateLinks uses this particular title format to generate date-based links
+# @TODO: take yesterday's #Tomorrow section and add it here somewhere.
 template = """# {date}
 {uline}
 
@@ -11,21 +12,23 @@ template = """# {date}
 
 
 ## Daily checklist
-
-- [ ] wake up
+- [ ] get up | 
 - [ ] make bed
-- [ ] prayers - get outdoors and talk to those who can hear and understand
+- [ ] Yoga
+- [ ] [Daily Prayer <3](../Daily Prayer <3.mkd)
+- [ ] meditate
+- [ ] feeding prayers - get outdoors to talk and sing to spirit
+- [ ] outdoors chore? (water turkey wing) gardening?
 - [ ] make breakfast
 - [ ] eat and enjoy
 
 - [ ] do Work
 
 - [ ] body self care
-- [ ] meditate
 - [ ] deeply relax (other than meditation)
 
 - [ ] make a bead
-- [ ] journal (using vimwiki diary)
+- [ ] journal
 - [ ] go to bed on time | 
 
 ## Todo
@@ -40,6 +43,7 @@ template = """# {date}
 
 ### Forgiveness
 
+## Tomorrow
 """
 
 date = (datetime.date.today() if len(sys.argv) < 2
