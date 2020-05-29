@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import sys
 #import datetime
+# requires https://github.com/lauft/timew-report
 from timewreport.parser import TimeWarriorParser
 
 parser = TimeWarriorParser(sys.stdin)

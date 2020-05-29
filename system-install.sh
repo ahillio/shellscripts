@@ -263,6 +263,8 @@ pip install ptpython
 .zshrc
 .vimrc
 .xinitrc
+.ptpython/config.py
+#taskwarrior&timewarrior
 
 sudo snap install spotify
 sudo snap install chromium
