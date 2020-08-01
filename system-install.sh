@@ -30,7 +30,7 @@ sudo make install
 ########################
 
 
-sudo apt-get install xclip
+sudo apt-get install xclip xsel
 sudo apt-get install gimp inkscape scribus
 sudo apt-get install tig
 apt-get install tree peco
@@ -142,9 +142,11 @@ wget http://psysh.org/manual/en/php_manual.sqlite
 sudo mkdir /usr/local/share/psysh
 sudo mv php_manual.sqlite /usr/local/share/psysh
 
+sudo apt-get install net-tools
 
 ### End Handbuilt Server ###
 ############################
+
 
 ####################
 ### Install DDEV ###
@@ -166,12 +168,13 @@ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo apt-key fingerprint 0EBFCD88
 # verify fingerprint https://docs.docker.com/install/linux/docker-ce/ubuntu/
 # using $(lsb_release) with Linux Mint does not work
-# sudo add-apt-repository \
-#   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-#   $(lsb_release -cs) \
-#   stable"
+sudo add-apt-repository \
+  "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) \
+  stable"
 # with Mint, use "Xenial" instead :/
-sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable"
+# sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable"
+sudo apt-get install docker-ce docker-ce-cli containerd.io
 wget https://github.com/docker/compose/releases/download/1.25.1/docker-compose-Linux-x86_64
 sudo chmod +x docker-compose-Linux-x86_64
 sudo mv docker-compose-Linux-x86_64 /usr/local/bin/docker-compose
@@ -241,9 +244,10 @@ sudo apt-get install imagemagick
 
 # install nvm to manage nodejs versions
 # nvm needs some config in .zshrc to work
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
 nvm install node
 npm install gulp-cli -g
+npm install -g fb-messenger-cli 
 
 sudo pip3 install asciinema # or with `-H`?
 sudo -H pip3 install asciinema
@@ -282,11 +286,34 @@ pip install upass
 
 sudo apt-get install irssi #irc client for terminal
 
+sudo apt-get install audacity pavucontrol
+
+sudo apt-get install pdfgrep
+
+sudo apt-get install ledger python-ledger
+
+# stripe
+sudo apt-key adv --keyserver hkp://pool.sks-keyservers.net:80 --recv-keys 379CE192D401AB61
+echo "deb https://dl.bintray.com/stripe/stripe-cli-deb stable main" | sudo tee -a /etc/apt/sources.list
+sudo apt-get update
+sudo apt-get install stripe
+stripe completion
+#/end stripe
+
+sudo apt-get install jq
+
 #===============
 # Dumping Ground:
 #===============
 
 sudo pip3 install tasklib
-
 pip3 install vit
 
+pip3 install khal
+
+sudo apt-get install fzf
+
+sudo apt-get install pass 
+
+# Email
+sudo apt-get install neomutt isync msmtp
