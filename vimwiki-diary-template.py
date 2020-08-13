@@ -13,10 +13,15 @@ while i < length:
     uline += '-'
     i += 1
 
+
 # Today's calendar items
 # @TODO: does `calEvents = ''` need to be there?
 calEvents = ''
 calEvents = subprocess.run("khal list today 1d | tail -n +2", shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
+# @TODO: 
+# 01:00 PM-03:00 PM hang with Aliona :: email from JJJ, tuning forks?
+# in events fromatted like that, change `::` to other string, perhpas `|` or `—` since vimwiki detects it as a tag.
+
 
 # Tasks
 tw = TaskWarrior('/home/alec/.task')
@@ -28,6 +33,7 @@ for task in tasksDue:
 # 1. get tags
 # 2. test `datetime.datetime.today().weekday() < 5` (days of week represented as 0-6 integers, so 5 is saturday)
 # 3. exclude tasks with `work` tag
+
 
 # Notes from yesterday's diary
 yesNotes = ''
@@ -54,21 +60,23 @@ template = """# {date}
 - [ ] make bed
 - [ ] yoga
 - [ ] find solace in nature
-- [ ] [Prayer <3](../prayer.mkd)
 
 - [ ] work
 {yesNotes}{calEvents}{todaysTasks}
-- [ ] meditate in prayer
-
+- [ ] meditate
+- [ ] deep relaxtion/nourishment
 - [ ] body self care
-- [ ] water the garden
 
-- [ ] deeply relax (other than meditation)
 - [ ] prep tomorrows food&tea
-- [ ] [meditate in prayer <3](../prayer.mkd)
 - [ ] go to bed on time | 
 
+## Prayers
+- [ ] shellbeads
+[Prayer <3](../prayer.mkd)
+
 ## Chores
+- garden
+- cleaning
 
 ---
 
@@ -84,6 +92,4 @@ template = """# {date}
 
 ## Tomorrow"""
 
-# @TODO: logic to only include yesNotes/calEvents/todaysTasks if they have values
-# make them all a single variable to include as {work}
 print(template.format(uline=uline, date=date, todaysTasks=todaysTasks, yesNotes=yesNotes, calEvents=calEvents.stdout))
