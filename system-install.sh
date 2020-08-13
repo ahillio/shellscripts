@@ -314,6 +314,24 @@ pip3 install khal
 sudo apt-get install fzf
 
 sudo apt-get install pass 
+pip install upass
+
+sudo apt-get install bitlbee-libpurple
+sudo apt install bitlbee-plugin-facebook
+# @TODO: install https://github.com/dylex/slack-libpurple
+# irssi + bittlbee + facebook/slack/etc all-in-one-app
+sudo apt-get install bitlbee-libpurple
+sudo apt install bitlbee-plugin-facebook
+vi ~/bin/system-install.sh
+sudo apt-get install pandoc
+sudo apt-get install xelatex
+sudo apt-get install xetex
+sudo apt-get install texlive-xetex
+sudo apt-get install wkhtmltopdf
+curl -kL https://github.com/tizonia/tizonia-openmax-il/raw/master/tools/install.sh | bash
+# ARHG I hate snap for perpetuating package-management-hell
+# snap install tizonia
 
 # Email
 sudo apt-get install neomutt isync msmtp
+pip3 install khard
