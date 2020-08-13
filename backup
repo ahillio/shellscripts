@@ -9,25 +9,41 @@ set -e
 # rsync -avvr source destination
 # -a  archive mode
 # -vv show verbose information about file transfers and skips
+# -r  recursively copy subdirectories
 
 #printf "Begin syncing www."
-#rsync -avvr ~/www/ /media/alec/storage/www
+#rsync -avvr ~/www/ /media/alec/storage/www/
 #printf "Done syncing www.\nNow sync accounting."
 
 # ACCOUNTING
-#rsync -avvr --exclude='*.sql' --exclude='*.tgz' --exclude='*.gz' --exclude='*.zip' /home/alec/accounting/ /media/alec/storage/accounting
-printf "\nNow sync Webworks...\n"
+#rsync -avvr --exclude='*.sql' --exclude='*.tgz' --exclude='*.gz' --exclude='*.zip' /home/alec/accounting/ /media/alec/storage/accounting/
+#printf "\nNow sync Webworks...\n"
+
+# @TODO: rysnc breaks when filenames have `:`
 
 # WORK
 # rsync -avvr /home/alec/Webworks/ /media/alec/storage/Webworks
-rsync -avvrz --exclude='*.sql' --exclude='*.tgz' --exclude='*.gz' --exclude='*.zip' ~/Work/ /media/alec/storage/Work
+rsync -avvrz --exclude='*.sql' --exclude='*.tgz' --exclude='*.gz' --exclude='*.zip' ~/Work/ /media/alec/storage/Work/
 printf "\nDone syncing Works.\nNow sync Documents...\n"
 
 # DOCUMENTS
-rsync -avvr --exclude='*.sql' --exclude='*.tgz' --exclude='*.gz' --exclude='*.zip' /home/alec/Documents/ /media/alec/storage/Documents
+rsync -avvr --exclude='*.sql' --exclude='*.tgz' --exclude='*.gz' --exclude='*.zip' /home/alec/Documents/ /media/alec/storage/Documents/
 printf "\nDone syncing documents.\n"
 
-rsync -avvr --exclude='*.sql' --exclude='*.tgz' --exclude='*.gz' --exclude='*.zip' /home/alec/www/ /media/alec/storage/www
+rsync -avvr /home/alec/.task/ /media/alec/storage/tasks/
+printf "\nDone syncing tasks.\n"
+
+rsync -avvr /home/alec/.timewarrior/ /media/alec/storage/time/
+printf "\nDone syncing time.\n"
+
+rsync -avvr --exclude='view' /home/alec/.dotfiles/ /media/alec/storage/dotfiles/
+printf "\nDone syncing documents.\n"
+
+rsync -avvr /home/alec/bin/ /media/alec/storage/bin/
+printf "\nDone syncing bin.\n"
+
+# all important www projects should be stored on their own servers, dev branches pushed to remote.
+# rsync -avvr --exclude='*.sql' --exclude='*.tgz' --exclude='*.gz' --exclude='*.zip' /home/alec/www/ /media/alec/storage/www
 
 #rsync -avvr --exclude='*.sql' --exclude='*.tgz' --exclude='*.gz' --exclude='*.zip' --ignore-existing /home/alec/Pictures/ /media/alec/storage/Pictures/laptop-sync
 #printf "\nDone syncing pictures.\n"
