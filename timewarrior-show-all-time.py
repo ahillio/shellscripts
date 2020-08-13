@@ -1,8 +1,7 @@
 #!/usr/bin/python
 import sys
-#import datetime
-# requires https://github.com/lauft/timew-report
-from timewreport.parser import TimeWarriorParser
+import datetime
+from timewreport.parser import TimeWarriorParser #https://github.com/lauft/timew-report
 
 parser = TimeWarriorParser(sys.stdin)
 
@@ -38,9 +37,8 @@ for tag in sorted(totals):
     formatted = totals[tag]
     grand_total += totals[tag].seconds
     print('{:{width}} {:10}'.format(tag, formatted, width=max_width))
-
 ## Compose total.
-#print('{} {}'.format(' ' * max_width, '----------'))
-#grand_total = datetime.timedelta(seconds=grand_total)
-#print('{:{width}} {:10}'.format('Total', grand_total, width=max_width))
+print('{} {}'.format(' ' * max_width, '----------'))
+grand_total = datetime.timedelta(seconds=grand_total)
+print('{:{width}} {:10}'.format('Total', grand_total, width=max_width))
 
