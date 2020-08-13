@@ -11,6 +11,10 @@ tags = ''
 for interval in parser.get_intervals():
     tags = interval.get_tags()
     if 'invoiced' not in tags:
+        if 'clients' in tags:
+            tags.remove('clients')
+        if 'work' in tags:
+            tags.remove('work')
         date = interval.get_start()
         duration = interval.get_duration()
         # @TODO: delete "clients", "work", tags
