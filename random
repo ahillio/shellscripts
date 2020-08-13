@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+set -euxo pipefail
+
+# @TODO: fix the format of this!
+# `random 13` will produce something like:
+#    + base64
+#    + tail -1
+#    + head -c 13
+#    + tr -d O0Il1
+#    + tr -dc '[:alnum:]'
+#    YMxKShvv7WErB
+# At first the script was simply:
+# base64 < /dev/urandom | tr -d 'O0Il1' | tr -dc '[:alnum:]' | head -c $1 | tail -1
+# and then I tried creating assigning output to a variable like so:
+# RANDOMSTRING=$(base64 < /dev/urandom | tr -d 'O0Il1' | tr -dc '[:alnum:]' | head -c $1)
+# echo $RANDOMSTRING
+# which resulted in:
+#    ++ base64
+#    ++ tail -1
+#    ++ head -c 13
+#    ++ tr -d O0Il1
+#    ++ tr -dc '[:alnum:]'
+#    + RANDOMSTRING=YMxKShvv7WErB
+# and so then I added `tail -1` to the final pipe which didn't change the output at all :(
+# RANDOMSTRING=$(base64 < /dev/urandom | tr -d 'O0Il1' | tr -dc '[:alnum:]' | head -c $1 | tail -1)
+# the way this script works the following `echo` didn't even do anything
+# echo $RANDOMSTRING
+# so let's revert back to the original
+base64 < /dev/urandom | tr -d 'O0Il1' | tr -dc '[:alnum:]' | head -c $1
+# I thought: gee! maybe I can pipe this to xclip, but no, that results in:
+#     + base64
+#     + tr -d O0Il1
+#     + tr -dc '[:alnum:]'
+#     + head -c 13
+#     + xclip
+# and the string doesn't even get copied to clipboard - weird!
+# base64 < /dev/urandom | tr -d 'O0Il1' | tr -dc '[:alnum:]' | head -c $1 | xclip
