@@ -35,7 +35,7 @@ for interval in parser.get_intervals():
 #    total = total + duration
 
 #print(total)
-print('--------')
+print('----------------')
 
 # We calculate the time out like this manually because we don't want numbers of hours greater than 24 to be presented as days
 total_secs = int(total.total_seconds())
@@ -45,4 +45,4 @@ hours = (total_secs // 3600)
 
 # for new versions of python 3.6 and up
 # print(f"{hours}:{mins:02}:{secs:02}")
-print("{hours}:{mins:02}:{secs:02}".format(hours=hours, mins=mins, secs=secs))
+print("total = {hours}:{mins:02}:{secs:02}".format(hours=hours, mins=mins, secs=secs))
