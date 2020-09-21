@@ -14,9 +14,9 @@ body {
   font-family: Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
   font-size: 12px;
   line-height: 1.7;
-  padding: 1em;
+  padding: 0;
   margin: auto;
-  max-width: 42em;
+  max-width: 32em;
   background: #fefefe;
 }
 
@@ -271,6 +271,8 @@ table td {
   body {
     font-size: 12pt;
     max-width: 100%;
+    margin: 1em;
+    margin-top: 1em !important;
   }
 
   a, a:visited {
@@ -310,12 +312,12 @@ table td {
   }
 
   @page :left {
-    margin: 15mm 20mm 15mm 10mm;
-}
+    margin: 35mm 35mm 35mm 35mm;
+  }
 
   @page :right {
-    margin: 15mm 10mm 15mm 20mm;
-}
+    margin: 35mm 35mm 35mm 35mm;
+  }
 
   p, h2, h3 {
     orphans: 3;

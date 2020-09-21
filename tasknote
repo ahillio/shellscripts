@@ -109,6 +109,9 @@ if [ $# -gt 1 ]; then
 	exit 1
 fi
 
+# @TODO add logic:
+#       if file exists: edit and create annotation
+#       else: just edit, don't delete/recreate annotation because that's dumb
 #create/edit $file with editor
 $SHELL -c "$EDITOR $file"
 
@@ -116,7 +119,7 @@ $SHELL -c "$EDITOR $file"
 # the edited note file.
 # @TODO: don't use annotations.  Use an `UDA` because it can have a `marker` associated with it for easy visual indication of notefile's existence inside `vit` reports
 if [ -f $file ]; then
-  NOTEMSG="[tasknote] `head -1 $file`"
+  NOTEMSG="[tasknote]"
   # remove any previous annotation - we want only a single
   # tasknote annotation. Detection works through the
   # [tasknote] annotation prefix

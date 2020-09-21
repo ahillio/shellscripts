@@ -1,4 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+# @TODO set path:
+cd ~/www
 
 DATE=$(date +%F)
 COMMIT=$(git rev-parse HEAD | cut -c-7)

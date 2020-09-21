@@ -301,6 +301,7 @@ stripe completion
 #/end stripe
 
 sudo apt-get install jq
+sudo apt-get install moreutils #contains `vipe` to edit contents of pipeline in a text editor
 
 #===============
 # Dumping Ground:
@@ -316,13 +317,30 @@ sudo apt-get install fzf
 sudo apt-get install pass 
 pip install upass
 
-sudo apt-get install bitlbee-libpurple
-sudo apt install bitlbee-plugin-facebook
-# @TODO: install https://github.com/dylex/slack-libpurple
+# @TODO
+# weechat
+sudo apt-get install dirmngr gpg-agent apt-transport-https
+sudo apt-key adv --keyserver hkps://keys.openpgp.org --recv-keys 11E9DE8848F2B65222AA75B8D1820DB22A11534E
+echo "deb https://weechat.org/ubuntu eoan main" | sudo tee /etc/apt/sources.list.d/weechat.list
+echo "deb-src https://weechat.org/ubuntu eoan main" | sudo tee -a /etc/apt/sources.list.d/weechat.list
+sudo apt-get update
+sudo apt-get install weechat-curses weechat-plugins weechat-python weechat-perl
+
 # irssi + bittlbee + facebook/slack/etc all-in-one-app
+sudo apt-get install bitlbee
 sudo apt-get install bitlbee-libpurple
-sudo apt install bitlbee-plugin-facebook
-vi ~/bin/system-install.sh
+sudo apt install bitlbee-plugin-facebook # https://github.com/bitlbee/bitlbee-facebook
+install https://github.com/dylex/slack-libpurple https://github.com/EionRobb/purple-mattermost
+sudo vi /etc/bitlbee/bitlbee.conf #add the following line:
+# RunMode = ForkDaemon
+# @NOTE: requires reboot
+# uncomment following lines: 
+# User = bitlbee
+# DaemonInterface = 0.0.0.0
+# DaemonPort = 6667
+chown -R bitlbee:bitlbee /var/lib/bitlbee
+
+
 sudo apt-get install pandoc
 sudo apt-get install xelatex
 sudo apt-get install xetex
@@ -335,3 +353,11 @@ curl -kL https://github.com/tizonia/tizonia-openmax-il/raw/master/tools/install.
 # Email
 sudo apt-get install neomutt isync msmtp
 pip3 install khard
+
+# Element & Matrix
+sudo apt install -y wget apt-transport-https
+sudo wget -O /usr/share/keyrings/riot-im-archive-keyring.gpg https://packages.riot.im/debian/riot-im-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/riot-im-archive-keyring.gpg] https://packages.riot.im/debian/ default main" | sudo tee /etc/apt/sources.list.d/riot-im.list
+sudo apt update
+sudo apt install element-desktop
+# /end element installation

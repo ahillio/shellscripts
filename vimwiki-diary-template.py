@@ -53,7 +53,7 @@ template = """# {date}
 {uline}
 [Journal entry template](../../../bin/vimwiki-diary-template.py)
 
-## Dreams & Waking
+## Dreams, Waking, Morning
 
 ## Daily checklist
 - [ ] get up | 
