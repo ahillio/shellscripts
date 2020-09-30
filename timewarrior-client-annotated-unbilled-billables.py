@@ -14,23 +14,24 @@ for interval in parser.get_intervals():
     # this report shows only un-invoiced time, so we ignore "invoiced" time entries  
     if 'invoiced' not in tags:
         if 'unbillable' not in tags:
-            # hide 'client' and 'work' tags since they clutter this report
-            if 'clients' in tags:
-                tags.remove('clients')
-            if 'work' in tags:
-                tags.remove('work')
-            sep = ', '
-            taglist = sep.join(tags)
-            date = interval.get_start()
-            duration = interval.get_duration()
-            output = str(date.date()) + ' - ' + str(duration) + ' - ' + taglist
-            ant = interval.get_annotation()
-            if ant:
-                output += ' ||| ' + str(ant)
-            # print individual time entry
-            print(output)
-            # add individual time to total time
-            total = total + duration
+            if 'nonbillable' not in tags:
+                # hide 'client' and 'work' tags since they clutter this report
+                if 'clients' in tags:
+                    tags.remove('clients')
+                if 'work' in tags:
+                    tags.remove('work')
+                sep = ', '
+                taglist = sep.join(tags)
+                date = interval.get_start()
+                duration = interval.get_duration()
+                output = str(date.date()) + ' - ' + str(duration) + ' - ' + taglist
+                ant = interval.get_annotation()
+                if ant:
+                    output += ' ||| ' + str(ant)
+                # print individual time entry
+                print(output)
+                # add individual time to total time
+                total = total + duration
 
 print('----------------')
 

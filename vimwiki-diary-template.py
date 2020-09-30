@@ -55,6 +55,7 @@ template = """# {date}
 
 ## Dreams, Waking, Morning
 
+
 ## Daily checklist
 - [ ] get up | 
 - [ ] make bed
@@ -72,7 +73,7 @@ template = """# {date}
 
 ## Prayers
 - [ ] shellbeads
-[Prayer <3](../prayer.mkd)
+[blessing and healing](blessing-and-healing)&[Prayer <3](../prayer.mkd)
 
 ## Chores
 - garden
