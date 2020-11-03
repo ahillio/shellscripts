@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+import os
 import sys
 import subprocess
 from datetime import datetime, timedelta
@@ -16,8 +17,10 @@ while i < length:
 
 # Today's calendar items
 # @TODO: does `calEvents = ''` need to be there?
+# note: when running that subprocess in `ptpython` do `print(calEvents.stdout)`
 calEvents = ''
-calEvents = subprocess.run("khal list today 1d | tail -n +2", shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
+calEvents = subprocess.run("khal list today 1d | tail -n +2 | sed 's/^/- [ ] /'", shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
+calEvents = calEvents.stdout + '\n'
 # @TODO: 
 # 01:00 PM-03:00 PM hang with Aliona :: email from JJJ, tuning forks?
 # in events fromatted like that, change `::` to other string, perhpas `|` or `—` since vimwiki detects it as a tag.
@@ -51,7 +54,9 @@ with open (yesJournal, "r") as f:
 # so `# {date}` must be the exact title
 template = """# {date}
 {uline}
-[Journal entry template](../../../bin/vimwiki-diary-template.py)
+[Diary entry template](../../../bin/vimwiki-diary-template.py)
+[Journal](Journal.mkd)
+[Blog Planning](blog-planning.mkd)
 
 ## Dreams, Waking, Morning
 
@@ -60,28 +65,31 @@ template = """# {date}
 - [ ] get up | 
 - [ ] make bed
 - [ ] yoga
-- [ ] find solace in nature
 
-- [ ] work
+- TODO:
 {yesNotes}{calEvents}{todaysTasks}
+**Self Care**
+- [ ] find solace in nature
 - [ ] meditate
 - [ ] deep relaxtion/nourishment
 - [ ] body self care
-
 - [ ] prep tomorrows food&tea
-- [ ] go to bed on time | 
 
-## Prayers
-- [ ] shellbeads
-[blessing and healing](blessing-and-healing)&[Prayer <3](../prayer.mkd)
-
-## Chores
+**Chores**
 - garden
 - cleaning
 
----
+**Prayers**
+- [ ] shellbeads
+[blessing and healing](blessing-and-healing)&[Prayer <3](../prayer.mkd)
 
-## Reflections
+- [ ] go to bed on time | 
+
+--------
+
+## Notes
+
+### Reflections
 
 ### Struggles
 
@@ -93,4 +101,5 @@ template = """# {date}
 
 ## Tomorrow"""
 
-print(template.format(uline=uline, date=date, todaysTasks=todaysTasks, yesNotes=yesNotes, calEvents=calEvents.stdout))
+print(template.format(uline=uline, date=date, todaysTasks=todaysTasks, yesNotes=yesNotes, calEvents=calEvents))
+#print(template.format(uline=uline, date=date, todaysTasks=todaysTasks, yesNotes=yesNotes, calEvents=calEvents.stdout))
