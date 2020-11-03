@@ -19,7 +19,7 @@ set -e
 #rsync -avvr --exclude='*.sql' --exclude='*.tgz' --exclude='*.gz' --exclude='*.zip' /home/alec/accounting/ /media/alec/storage/accounting/
 #printf "\nNow sync Webworks...\n"
 
-# @TODO: rysnc breaks when filenames have `:`
+# @TODO: rysnc breaks when filenames have `:` ???
 
 # WORK
 # rsync -avvr /home/alec/Webworks/ /media/alec/storage/Webworks
@@ -38,6 +38,12 @@ printf "\nDone syncing time.\n"
 
 rsync -avvr --exclude='view' /home/alec/.dotfiles/ /media/alec/storage/dotfiles/
 printf "\nDone syncing documents.\n"
+
+rsync -avvr /home/alec/.calendar/ /media/alec/storage/calendar/
+printf "\nDone syncing calendar.\n"
+
+rsync -avvr /home/alec/.password-store/ /media/alec/storage/.password-store/
+printf "\nDone syncing passwords.\n"
 
 rsync -avvr /home/alec/bin/ /media/alec/storage/bin/
 printf "\nDone syncing bin.\n"
