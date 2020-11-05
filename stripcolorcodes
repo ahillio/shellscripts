@@ -1,0 +1,14 @@
+#! /usr/bin/perl
+
+# I just found this in someone's bin dir on github and recall a time when what-might-have-been ansi color codes were very annoying
+
+# obviously pulled from Term::ANSIColor
+# https://unix.stackexchange.com/questions/4527/program-that-passes-stdin-to-stdout-with-color-codes-stripped
+
+use strict;
+use warnings;
+
+while (<>) {
+  s/\e\[?.*?[\@-~]//g; # Strip ANSI escape codes
+  print;
+}
