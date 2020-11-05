@@ -1,0 +1,55 @@
+{
+  "object": "list",
+  "data": [
+    {
+      "id": "in_1HW85aFGUwFHXzvl8wJbW7V7",
+      "object": "invoice",
+      "account_country": "US",
+      "customer_name": "clientOne",
+      "date": 1601244686,
+      "livemode": true,
+      "metadata": {},
+      "paid": true,
+      "status": "paid",
+      "total": 49500
+    },
+    {
+      "id": "in_1HJlIZFGUwFHXzvlWqhegRkf",
+      "object": "invoice",
+      "account_country": "US",
+      "customer_name": "clientTwo",
+      "date": 1598297143,
+      "livemode": true,
+      "metadata": {},
+      "paid": true,
+      "status": "paid",
+      "total": 51000
+    },
+    {
+      "id": "in_1HJkg5FGUwFHXzvlYp2uC63C",
+      "object": "invoice",
+      "account_country": "US",
+      "customer_name": "clientThree",
+      "date": 1598294757,
+      "livemode": true,
+      "metadata": {},
+      "paid": true,
+      "status": "paid",
+      "total": 57000
+    },
+    {
+      "id": "in_1H8B0pFGUwFHXzvlU6nrOm6I",
+      "object": "invoice",
+      "account_country": "US",
+      "customer_name": "clientThree",
+      "date": 1595536051,
+      "livemode": true,
+      "metadata": {},
+      "paid": true,
+      "status": "paid",
+      "total": 20000
+    }
+  ],
+  "has_more": true,
+  "url": "/v1/invoices"
+}
