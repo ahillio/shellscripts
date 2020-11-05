@@ -55,7 +55,7 @@ with open (yesJournal, "r") as f:
 template = """# {date}
 {uline}
 [Diary entry template](../../../bin/vimwiki-diary-template.py)
-[Journal](Journal.mkd)
+[Journal](journal.mkd)
 [Blog Planning](blog-planning.mkd)
 
 ## Dreams, Waking, Morning
