@@ -2,15 +2,17 @@
 # generate pdf files from php files
 # used for making code posters
 
-phpfiles=$(ls | grep ".php" | sed 's|\.php||g')
-for file in $phpfiles; do
+[ "$#" = 1 ] || { echo Supply filetype as argument; return 9; }
+codefiles=$(ls | grep ".$1" | sed "s|\.$1||g")
+for file in $codefiles; do
   if [ -e $file.tex ]
   then
     echo "$file.tex exists already.  Now creating pdf file..."
     pdflatex --shell-escape $file.tex
   else
     cp ~/bin/inc/template.tex $file.tex
-    sed -i "s/example/$file/" $file.tex
+    sed -i "s/filetype/$1/" $file.tex
+    sed -i "s/example/$file.$1/" $file.tex
     pdflatex --shell-escape $file.tex
   fi
   pdfcrop $file.pdf
