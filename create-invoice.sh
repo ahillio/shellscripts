@@ -11,19 +11,19 @@ APIKEY=$(cat ~/.passwords/stripe-live-sk)
 # SET THESE FOUR VARIABLES TO CREATE THE INVOICE
 # ----------------------------------------------
 # DUEDATE must be in the future
-DUEDATE=$(date -d '2020-11-04' +%s)
+DUEDATE=$(date -d '2020-11-20' +%s)
 # CUSTOMER ID's
 # ATN cus_HtVDaVrIBz5RfC
 # WPP cus_HOUnJ8NiE7pj6g
-CUSTOMER="cus_HtVDaVrIBz5RfC"
-AMOUNT="49500"
-WORKDESCRIPTION="Build out site and custom theme: configuring layout_builder; drush site aliases, site management scripts, rebuild local dev from prod; media configuration; fix theme bug: breaks media insert in layout builder; clean up git history, push dev branch to test site online; add manager role with basic permissions; configure path aliases, event type, classes view, fix nav menu dropdown; reinstall SSL certificate and communicate need for auto-renewing certs with Erik to relay to greengeeks.  Fix spamblock on login form on old D7 site.  Training Jenni in Drupal content management, discussing design process, planning data architecture of event types."
+CUSTOMER="cus_HOUnJ8NiE7pj6g"
+AMOUNT="113500"
+WORKDESCRIPTION="Discussing image layout and templates for current/D7 site.  Planning and testing sitebuilding tools.  Installing Drupal 8 with the Varbase distribution and CiviCRM, overcomming several hurdles with the package management system.  Meeting showcasing the 'paragraphs' and 'layout builder' tools plus webforms and CiviCRM."
 
 # Invoke Stripe API to create line items and invoice
 stripe invoiceitems create --api-key=$APIKEY --customer=$CUSTOMER --amount=$AMOUNT --currency=usd --description="$WORKDESCRIPTION"
 stripe invoices create --live --api-key=$APIKEY --customer=$CUSTOMER --due-date=$DUEDATE --collection-method=send_invoice --description='Alec Hill
-14 Maple Leaf Farm Road
-Underhill, VT 05489'
+PO Box 160
+Richmond, VT 05477'
 
 # Instructions to SEND invoice
 echo "

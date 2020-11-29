@@ -86,6 +86,7 @@ cd ~/bin && git clone https://github.com/rupa/z && rm -rf z/.git
 ### Handbuild Server ###
 
 sudo apt-get install php php-xml libapache2-mod-php7.0 php7.0-sqlite3 php-mysql php-gd php-curl php-mbstring php-zip
+sudo apt-get install php7.3-intl
 sudo apt-get install mysql-server
 sudo apt-get install apache2
 sudo a2enmod rewrite
@@ -201,6 +202,7 @@ pip3 install pygments-style-solarized
 curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 sudo apt-get install nodejs
 sudo npm install -g nodejs/repl
+npm install -g lodash
 
 
 # @TODO install
@@ -270,8 +272,11 @@ pip install ptpython
 .ptpython/config.py
 #taskwarrior&timewarrior
 
-sudo snap install spotify
-sudo snap install chromium
+#sudo snap install spotify
+#sudo snap install chromium
+curl -sS https://download.spotify.com/debian/pubkey_0D811D58.gpg | sudo apt-key add - 
+echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
+sudo apt-get update && sudo apt-get install spotify-client
 
 sudo apt-get install taskwarrior
 sudo apt-get install timewarrior
@@ -300,7 +305,10 @@ sudo apt-get install stripe
 stripe completion
 #/end stripe
 
+# jq manipulates and fx views/explores json
 sudo apt-get install jq
+npm install -g fx
+
 sudo apt-get install moreutils #contains `vipe` to edit contents of pipeline in a text editor
 
 #===============
@@ -345,6 +353,7 @@ sudo apt-get install pandoc
 sudo apt-get install xelatex
 sudo apt-get install xetex
 sudo apt-get install texlive-xetex
+sudo apt-get install texlive-extra-utils #includes pdfcrop
 sudo apt-get install wkhtmltopdf
 curl -kL https://github.com/tizonia/tizonia-openmax-il/raw/master/tools/install.sh | bash
 # ARHG I hate snap for perpetuating package-management-hell
@@ -361,3 +370,8 @@ echo "deb [signed-by=/usr/share/keyrings/riot-im-archive-keyring.gpg] https://pa
 sudo apt update
 sudo apt install element-desktop
 # /end element installation
+
+pip install howdoi
+
+wget https://github.com/jitsi/jitsi-meet-electron/releases/download/v2.4.2/jitsi-meet-x86_64.AppImage && sudo mv jitsi-meet-x86_64.AppImage /usr/local/bin/jitsi
+sudo apt-get install enscript

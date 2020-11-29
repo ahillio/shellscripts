@@ -75,10 +75,6 @@ template = """# {date}
 - [ ] body self care
 - [ ] prep tomorrows food&tea
 
-**Chores**
-- garden
-- cleaning
-
 **Prayers**
 - [ ] shellbeads
 [blessing and healing](blessing-and-healing)&[Prayer <3](../prayer.mkd)

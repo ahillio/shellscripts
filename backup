@@ -48,6 +48,9 @@ printf "\nDone syncing passwords.\n"
 rsync -avvr /home/alec/bin/ /media/alec/storage/bin/
 printf "\nDone syncing bin.\n"
 
+rsync -avvr /home/alec/.ssh/ /media/alec/storage/ssh/
+printf "\nDone syncing .ssh.\n"
+
 # all important www projects should be stored on their own servers, dev branches pushed to remote.
 # rsync -avvr --exclude='*.sql' --exclude='*.tgz' --exclude='*.gz' --exclude='*.zip' /home/alec/www/ /media/alec/storage/www
 

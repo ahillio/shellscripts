@@ -62,7 +62,7 @@ a::selection {
 }
 
 p {
-  margin: 1em 0;
+  margin: .5em 0;
 }
 
 img {
@@ -73,6 +73,7 @@ h1, h2, h3, h4, h5, h6 {
   color: #111;
   line-height: 125%;
   margin-top: 2em;
+  margin-bottom: .5em;
   font-weight: normal;
 }
 
