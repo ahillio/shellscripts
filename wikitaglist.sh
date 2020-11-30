@@ -6,7 +6,8 @@ set -euo pipefail
 # https://stackoverflow.com/questions/65052880/how-to-loop-through-string-for-patterns-from-linux-shell/65052996
 
 ### Sweet One-liner ###
-grep -rh -e '^:\S*:$' ~/Documents/wiki/diary/*.mkd | tr -s ':' '\n' | sort -u
+grep -rh '^:\S*:$' ~/Documents/wiki/diary/*.mkd | tr -s ':' '\n' | sort -u
+# it was `grep -rh -e` but apparently `-e` is not necessary
 # but why doesn't `sed` work in place of `tr`???
 # grep -rh -e '^:\S*:$' ~/Documents/wiki/diary/*.mkd | sed 's|:|\r|g' | sort -u
 # because you're using `\r` instead of `\n` -- this is sed, not vim :/
