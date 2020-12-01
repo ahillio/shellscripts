@@ -17,9 +17,16 @@ for filename in sorted(os.listdir(directory)):
         # loop through file line by line
         for line in file:
             lnum += 1
+            # keep track of what ##section we're in
+            if re.search(r'^#{2,} \w{1,}', line):
+                section = line.strip()
+                section = re.sub('###', '##', section)
+                section = re.sub(' ', '', section)
+                continue
             if tagname in line:
                 tagline = line
                 taglinenum = lnum
+                tagsection = section
                 copy = True
                 continue
             # stop copying when reaching a new section header
@@ -44,5 +51,5 @@ for filename in sorted(os.listdir(directory)):
                     tagcontent += line
         # if we have results, print them!
         if len(tagcontent) != 0:
-            print(date + ' ' + tagline.rstrip() + ' line#' + str(taglinenum))
+            print(date + ' ' + tagsection + ' ' + tagline.rstrip() + ' line#' + str(taglinenum))
             print(tagcontent)
