@@ -29,15 +29,16 @@ for filename in sorted(os.listdir(directory)):
                 tagsection = section
                 copy = True
                 continue
-            # stop copying when tag content is complete
-            elif re.search('^##|^---|^\s*$|^:\w*:|^- TODO', line):
-                copy = False
-                continue
-            # now add lines that follow tagname to the tagcontent variable
             elif copy:
-                if len(line.strip()) != 0 :
+                # now add lines that follow tagname to the tagcontent variable
+                if len(line.strip()) != 0 and not re.search('^##|^---|^\s*$|^:\w*:|^- TODO', line):
                     tagcontent += line
-        # if we have results, print them!
-        if len(tagcontent) != 0:
-            print(date + ' ' + tagsection + ' ' + tagline.rstrip() + ' line#' + str(taglinenum))
-            print(tagcontent)
+                # stop copying when tag content is complete
+                elif re.search('^##|^---|^\s*$|^:\w*:|^- TODO', line):
+                    copy = False
+                    # if we have results, print them!
+                    if len(tagcontent) != 0:
+                        print(date + ' ' + tagsection + ' ' + tagline.rstrip() + ' line#' + str(taglinenum))
+                        print(tagcontent)
+                        tagcontent=''
+                    continue
