@@ -23,6 +23,7 @@ for filename in sorted(os.listdir(directory)):
                 section = re.sub('###', '##', section)
                 section = re.sub(' ', '', section)
                 continue
+            # find tag and start copying tag content
             if tagname in line:
                 tagline = line
                 taglinenum = lnum
@@ -31,14 +32,14 @@ for filename in sorted(os.listdir(directory)):
                 continue
             elif copy:
                 # now add lines that follow tagname to the tagcontent variable
-                if len(line.strip()) != 0 and not re.search('^##|^---|^\s*$|^:\w*:|^- TODO', line):
+                if not re.search('^##|^---|^\s*$|^:\w*:|^- TODO', line):
                     tagcontent += line
-                # stop copying when tag content is complete
-                elif re.search('^##|^---|^\s*$|^:\w*:|^- TODO', line):
-                    copy = False
+                else:
+                    # we've hit the end of that tag's content
                     # if we have results, print them!
-                    if len(tagcontent) != 0:
-                        print(date + ' ' + tagsection + ' ' + tagline.rstrip() + ' line#' + str(taglinenum))
-                        print(tagcontent)
-                        tagcontent=''
+                    print(date + ' ' + tagsection + ' ' + tagline.rstrip() + ' line#' + str(taglinenum))
+                    print(tagcontent)
+                    tagcontent=''
+                    # resume loop process of looking for next tag
+                    copy = False
                     continue
