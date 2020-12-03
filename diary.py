@@ -1,17 +1,20 @@
 #!/usr/bin/python3
 
 import os
+import sys
 
+sectionName = sys.argv[1]
+sectionHeader = '## ' + sectionName
 directory = '/home/alec/Documents/wiki/diary/'
 for filename in sorted(os.listdir(directory)):
   if filename.startswith("20") and filename.endswith(".mkd"): 
     with open(directory + filename) as file:
         copy = False
-        dreams = ''
+        content = ''
         date = file.readline()
         date = date.replace("\n", "")
         for line in file:
-            if "## Dreams" in line:
+            if sectionHeader in line:
                 copy = True
                 continue
             elif "## " in line:
@@ -19,7 +22,7 @@ for filename in sorted(os.listdir(directory)):
                 continue
             elif copy:
                 if len(line.strip()) != 0 :
-                    dreams += line
-        if len(dreams) != 0:
+                    content += line
+        if len(content) != 0:
             print(date)
-            print(dreams)
+            print(content)
