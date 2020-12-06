@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+# Section report
+# @TODO print a little more content like line# section name along w/date
 
 import os
 import sys
