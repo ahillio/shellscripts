@@ -46,7 +46,7 @@ with open (yesJournal, "r") as f:
     for line in f:
         if "## Tomorrow" in line:
             for line in f:
-                line = '  ' + line
+                #line = ' ' + line
                 yesNotes = yesNotes + line
 
 # BEGIN TEMPLATE
@@ -61,12 +61,11 @@ template = """# {date}
 ## Dreams, Waking, Morning
 
 
-## Daily checklist
+## TODO
 - [ ] get up | 
 - [ ] make bed
 - [ ] yoga
 
-- TODO:
 {yesNotes}{calEvents}{todaysTasks}
 **Self Care**
 - [ ] find solace in nature
