@@ -353,8 +353,12 @@ sudo apt-get install pandoc
 sudo apt-get install xelatex
 sudo apt-get install xetex
 sudo apt-get install texlive-xetex
-sudo apt-get install texlive-extra-utils #includes pdfcrop
+sudo apt-get install texlive-extra-utils #includes pdfcrop and dvisvgm
 sudo apt-get install wkhtmltopdf
+sudo apt-get install python-pygments
+sudo apt-get install python-pygments-doc
+
+# cli music player
 curl -kL https://github.com/tizonia/tizonia-openmax-il/raw/master/tools/install.sh | bash
 # ARHG I hate snap for perpetuating package-management-hell
 # snap install tizonia
@@ -375,3 +379,6 @@ pip install howdoi
 
 wget https://github.com/jitsi/jitsi-meet-electron/releases/download/v2.4.2/jitsi-meet-x86_64.AppImage && sudo mv jitsi-meet-x86_64.AppImage /usr/local/bin/jitsi
 sudo apt-get install enscript
+
+# anacron does daily scheduled tasks independent from time of day, like "whenever the computer turns on"
+sudo apt-get install anacron
