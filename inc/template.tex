@@ -1,10 +1,16 @@
-\documentclass{article}
+\documentclass[varwidth=33.3cm,border=2mm]{standalone}
 
 \usepackage{minted}
 \usemintedstyle{solarized}
 
+% https://www.overleaf.com/learn/latex/Font_sizes,_families,_and_styles
+% FancyVerbLine sets the stile for the [linenos] line numbers
+\renewcommand{\theFancyVerbLine}{\sffamily
+  \textcolor[rgb]{0.5,0.5,1.0}{\Large
+  \oldstylenums{\arabic{FancyVerbLine}}}}
+
 \begin{document}
 \begin{LARGE}
-  \inputminted{filetype}{example}
+  \inputminted[xleftmargin=25pt,linenos]{filetype}{example}
 \end{LARGE}
 \end{document}
