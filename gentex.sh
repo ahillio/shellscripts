@@ -13,4 +13,4 @@ for file in $codefiles; do
   sed -i "s/example/$file.$1/" $file.tex
   pdflatex --shell-escape $file.tex
 done
-#rm -rf _minted-$file *.tex *.aux *.log
+rm -rf _minted-$file *.tex *.aux *.log
