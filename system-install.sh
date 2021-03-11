@@ -197,7 +197,11 @@ sudo apt-get install python-pip python3-pip
 pip install --upgrade pip #???
 pip install Pygments
 apt-get install python-setuptools python3-setuptools
-pip3 install pygments-style-solarized
+pip3 install pygments-style-solarized #WTF
+pip install pygments-solarized-style
+# WTF again.  try this instead:
+git clone git@github.com:john2x/solarized-pygment.git
+# and then `sudo ./setup.py install`
 
 curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 sudo apt-get install nodejs

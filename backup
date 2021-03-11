@@ -4,6 +4,10 @@
 # set -eo pipefail ...why does that not work?
 set -e
 
+# @TODO test if storage drive is mounted &ifnot then:
+# mkdir /media/alec/storage
+# mount /dev/sdc1 /media/alec/storage
+
 # @todo why does rsync takes so damn long?
 # @doc
 # rsync -avvr source destination
@@ -37,7 +41,8 @@ rsync -avvr /home/alec/.timewarrior/ /media/alec/storage/time/
 printf "\nDone syncing time.\n"
 
 rsync -avvr --exclude='view' /home/alec/.dotfiles/ /media/alec/storage/dotfiles/
-printf "\nDone syncing documents.\n"
+rsync -avvr --exclude='view' /home/alec/.config/ /media/alec/storage/config/
+printf "\nDone syncing dotfiles and config.\n"
 
 rsync -avvr /home/alec/.calendar/ /media/alec/storage/calendar/
 printf "\nDone syncing calendar.\n"
@@ -50,6 +55,9 @@ printf "\nDone syncing bin.\n"
 
 rsync -avvr /home/alec/.ssh/ /media/alec/storage/ssh/
 printf "\nDone syncing .ssh.\n"
+
+rsync -avvr /home/alec/.fonts/ /media/alec/storage/fonts/
+printf "\nDone syncing .fonts.\n"
 
 # all important www projects should be stored on their own servers, dev branches pushed to remote.
 # rsync -avvr --exclude='*.sql' --exclude='*.tgz' --exclude='*.gz' --exclude='*.zip' /home/alec/www/ /media/alec/storage/www

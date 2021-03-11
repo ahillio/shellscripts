@@ -14,4 +14,4 @@ function stripe-invoices {
   }
 
 #stripe-invoices
-cat inc/stripe.json | jq -S -C '[.data[] | {invoice_id: .id, date: .date | strftime("%Y-%m-%d"), amount: .total,} | .amount = "$" + (.amount/100|tostring)] | sort_by(.date)'
+cat /home/alec/bin/inc/stripe.json | jq -S -C '[.data[] | {invoice_id: .id, date: .date | strftime("%Y-%m-%d"), amount: .total,} | .amount = "$" + (.amount/100|tostring)] | sort_by(.date)'

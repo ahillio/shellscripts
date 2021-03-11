@@ -31,7 +31,7 @@ tw = TaskWarrior('/home/alec/.task')
 tasksDue = tw.tasks.filter(status='pending', due__before='tomorrow')
 todaysTasks = ''
 for task in tasksDue:
-    todaysTasks += '  * [ ] ' + task['description'] + '  #' + task['uuid'][:8] + '\n'
+    todaysTasks += '* [ ] ' + task['description'] + '  #' + task['uuid'][:8] + '\n'
 # @TODO: exclude work tasks on weekends :)
 # 1. get tags
 # 2. test `datetime.datetime.today().weekday() < 5` (days of week represented as 0-6 integers, so 5 is saturday)
@@ -56,7 +56,8 @@ template = """# {date}
 {uline}
 [Diary entry template](../../../bin/vimwiki-diary-template.py)
 [Journal](journal.mkd)
-[Blog Planning](blog-planning.mkd)
+[Blog Planning](../blog-planning.mkd)
+[groceries and stuff](groceries and stuff)
 
 ## Dreams, Waking, Morning
 
@@ -64,20 +65,20 @@ template = """# {date}
 ## TODO
 - [ ] get up | 
 - [ ] make bed
-- [ ] yoga
+- [ ] [Prayer <3](../prayer.mkd)
+- [ ] yoga + kettlebell: get on the mat for at least five minutes
+- [ ] coffee/breakfast journal
 
-{yesNotes}{calEvents}{todaysTasks}
-**Self Care**
+**Care**
+- [ ] body self care, deep relaxtion/nourishment
 - [ ] find solace in nature
 - [ ] meditate
-- [ ] deep relaxtion/nourishment
-- [ ] body self care
+
+**Work**
+{yesNotes}{calEvents}{todaysTasks}
+**Night**
 - [ ] prep tomorrows food&tea
-
-**Prayers**
-- [ ] shellbeads
-[blessing and healing](blessing-and-healing)&[Prayer <3](../prayer.mkd)
-
+- [ ] shellbeads & [Prayer <3](../prayer.mkd)
 - [ ] go to bed on time | 
 
 --------

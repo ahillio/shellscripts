@@ -14,6 +14,7 @@ with open(diary, "r") as in_file:
 with open(diary, "w") as out_file:
     for line in buf:
         # if line == "- [ ] work\n":
-        if re.search(r'- \[.*\] work\n', line):
+        #if re.search(r'- \[.*\] work\n', line):
+        if line == "**Work**\n":
             line = line + newline
         out_file.write(line)

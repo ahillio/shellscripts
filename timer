@@ -2,5 +2,6 @@
 
 set -euo pipefail
 
+date +"%I:%M"
 sleep $1
 lame --decode ~/Media/Music/bridge\ isabella\ -\ GOOD\ DREAM\ BAD\ DREAM.mp3 - | play -
