@@ -9,17 +9,18 @@ apt-get install git gcc make pkg-config libx11-dev libxtst-dev libxi-dev
 ###  using caps2esc  ###
 
 sudo apt-get install cmake libyaml-cpp-dev build-essential libudev-dev libevdev-dev
-#note libevdev is required.  On the package on Fedora is called `libevdev-devel`.  `libevdev` is not available and `libevdev2` is already installed (but doesn't provide libudev.h file) and a `libevdev-dev` is available but websearch reveals that `libudev-dev` contains the libudev.h file which makes sense.  After installing libudev-dev, libevdev.h file is missing.
+# also `libboost-all-dev` was required to install on bunsenlabs but it's 500MB
 cd bin 
 git clone git@gitlab.com:interception/linux/tools.git
-cd tools && mkdir build && cd build
-cmake ..
-make
+# or https://gitlab.com/interception/linux/tools.git
+cd tools
+cmake -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build
 #sudo mv -t /usr/bin intercept udevmon uinput
 sudo make install
 cd ../..
 git clone git@gitlab.com:interception/linux/plugins/caps2esc.git
-cd caps2esc && mkdir build && cdbuild
+cd caps2esc && mkdir build && cd build
 cmake ..
 make
 #sudo mv caps2esc /usr/bin/
