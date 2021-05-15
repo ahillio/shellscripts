@@ -5,10 +5,12 @@
 set -e
 
 # @TODO test if storage drive is mounted &ifnot then:
-# mkdir /media/alec/storage
-# mount /dev/sdc1 /media/alec/storage
+####  mkdir /media/alec/storage
+####  mount /dev/sdc1 /media/alec/storage
+# https://www.tutorialspoint.com/how-to-mount-usb-drive-in-a-linux-system and 
+# https://askubuntu.com/questions/285539/detect-and-mount-devices
+# have some more info on working with devices
 
-# @todo why does rsync takes so damn long?
 # @doc
 # rsync -avvr source destination
 # -a  archive mode

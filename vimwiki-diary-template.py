@@ -54,7 +54,7 @@ with open (yesJournal, "r") as f:
 # so `# {date}` must be the exact title
 template = """# {date}
 {uline}
-[Diary entry template](../../../bin/vimwiki-diary-template.py)
+[Diary template](../../../bin/vimwiki-diary-template.py)
 [Journal](journal.mkd)
 [Blog Planning](../blog-planning.mkd)
 [groceries and stuff](groceries and stuff)
@@ -64,22 +64,18 @@ template = """# {date}
 
 ## TODO
 - [ ] get up | 
-- [ ] make bed
-- [ ] [Prayer <3](../prayer.mkd)
-- [ ] yoga + kettlebell: get on the mat for at least five minutes
-- [ ] coffee/breakfast journal
+- [ ] shellbeads & [Prayer <3](../prayer.mkd)
+- [ ] tea/breakfast journal
 
+{yesNotes}{calEvents}{todaysTasks}
 **Care**
 - [ ] body self care, deep relaxtion/nourishment
 - [ ] find solace in nature
 - [ ] meditate
 
-**Work**
-{yesNotes}{calEvents}{todaysTasks}
 **Night**
-- [ ] prep tomorrows food&tea
 - [ ] shellbeads & [Prayer <3](../prayer.mkd)
-- [ ] go to bed on time | 
+- [ ] sleep @
 
 --------
 

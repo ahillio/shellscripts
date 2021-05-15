@@ -2,6 +2,15 @@
 
 set -euo pipefail
 
-date +"%I:%M"
+if [ $# -eq 0 ]; then
+  printf "  Countdown timer with alarm
+  Provide duration of countdown as the only parameter
+  Duration can be number of seconds as integer: 90
+  Minutes can be specied by \`m\` as in: 5m\n"
+  exit 64
+fi
+
+TIME=$(date +"%I:%M")
+echo "Timer started at: $TIME"
 sleep $1
 lame --decode ~/Media/Music/bridge\ isabella\ -\ GOOD\ DREAM\ BAD\ DREAM.mp3 - | play -

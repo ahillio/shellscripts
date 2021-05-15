@@ -109,6 +109,7 @@ blockquote {
   color: #666666;
   margin: 0;
   padding-left: 3em;
+  border: none;
   border-left: 0.5em #EEE solid;
 }
 
@@ -182,6 +183,15 @@ li p:last-child {
 
 ul ul, ol ol {
   margin: .3em 0;
+}
+
+li {
+  list-style-type: none;
+}
+ul li:before {
+  content: '-';
+  position: absolute;
+  margin-left: -20px;
 }
 
 dl {

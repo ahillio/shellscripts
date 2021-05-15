@@ -1,8 +1,14 @@
 #!/bin/bash
+# @TODO what are the necessary steps to get:
+#                                           1. a working computer
+#                                           2. development toolkit
+# @TODO rebuild vim in a sane, resiliaent, deployable way
 
 apt-get update
 apt-get upgrade
 apt-get install git gcc make pkg-config libx11-dev libxtst-dev libxi-dev
+
+#@TODO set default editor and basic shell config for root user as well
 
 ########################
 ### enhance keyboard ###
@@ -266,15 +272,15 @@ pip3 install -U mycli
 pip install ptpython
 
 ### CREATE SYMLINKS FOR DOTFILES ###
-.gitconfig
-.myclirc
-.vim
-.tmux.conf
-.drush
-.zshrc
-.vimrc
-.xinitrc
-.ptpython/config.py
+#   .gitconfig
+#   .myclirc
+#   .vim
+#   .tmux.conf
+#   .drush
+#   .zshrc
+#   .vimrc
+#   .xinitrc
+#   .ptpython/config.py
 #taskwarrior&timewarrior
 
 #sudo snap install spotify
@@ -387,3 +393,10 @@ sudo apt-get install enscript
 
 # anacron does daily scheduled tasks independent from time of day, like "whenever the computer turns on"
 sudo apt-get install anacron
+
+# file manager: nnn and its suggested packages
+sudo apt-get install nnn
+sudo apt-get install mediainfo exiftool atool patool vlock lftp
+
+# markdown viewer
+sudo gem install mdless
