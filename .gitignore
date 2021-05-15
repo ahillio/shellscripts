@@ -3,6 +3,7 @@ z
 *.swo
 *.swp
 sandbox
+playground
 *png
 *jpg
 tig-2.5.1
@@ -10,3 +11,5 @@ composer
 test
 tmp
 help.mkd
+www
+config
