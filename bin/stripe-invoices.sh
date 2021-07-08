@@ -2,16 +2,61 @@
 
 set -euo pipefail
 
+CLIENT=$1
+#CLIENT='Winooski'
+APIKEY=$(cat ~/.password-store/stripe-live-sk)
+#clear
 
-function stripe-invoices {
-  APIKEY=$(cat ~/.passwords/stripe-live-sk)
-  curl https://api.stripe.com/v1/invoices -u $APIKEY: -G |
-    #works, unsorted
-    #jq -S -C '.data[] | {invoice_id: .id, client: .customer_name, date: .date | strftime("%Y-%m-%d"), amount: .total, status: .status} | .amount = "$" + (.amount/100|tostring)'
-    # to sort this took a lot of time, formerly unsorted, the following is sorted:
-    jq -S -C '[.data[] | {invoice_id: .id, client: .customer_name, date: .date | strftime("%Y-%m-%d"), amount: .total, status: .status} | .amount = "$" + (.amount/100|tostring)] | sort_by(.date)'
-    # https://unix.stackexchange.com/questions/613779/how-to-get-the-right-type-and-value-for-jq-to-sort
-  }
+#curl https://api.stripe.com/v1/invoices -u $APIKEY: -G | jq -Cr 
+#curl https://api.stripe.com/v1/invoices -u $APIKEY: -G | jq -C "[.data[] | select(.customer_name | contains(\"$CLIENT\")) | {invoice_id: .id, client: .customer_name, date: .date | strftime(\"%Y-%m-%d\"), amount: .total, status: .status} | .amount = \"$\" + (.amount/100|tostring)] | sort_by(.date)"
 
-#stripe-invoices
-cat /home/alec/bin/inc/stripe.json | jq -S -C '[.data[] | {invoice_id: .id, date: .date | strftime("%Y-%m-%d"), amount: .total,} | .amount = "$" + (.amount/100|tostring)] | sort_by(.date)'
+# nice and easy to read on multiple lines :)
+#curl https://api.stripe.com/v1/invoices -u $APIKEY: -G | jq -Cr "
+#  [.data[]
+#  | select(.customer_name | contains(\"$CLIENT\"))
+#  | {invoice_id: .id,
+#     client: .customer_name,
+#     date: .date | strftime(\"%Y-%m-%d\"),
+#     amount: .total, status: .status,
+#     work: .lines.data[].description}
+#  | .amount = \"$\" + (.amount/100|tostring)]
+#  | sort_by(.date)"
+
+FINALLINE='"Total: $\([$input | .data[] | .total] | add | . / 100)"'
+
+#curl https://api.stripe.com/v1/invoices -u $APIKEY: -G | jq -Cr '
+#  . as $input |
+#  ($input | [
+#   .data[]
+#   | {invoice_id: .id,
+#      client: .customer_name,
+#      date: .date | strftime("%Y-%m-%d"),
+#      amount: .total,
+#      status: .status}
+#   | .amount = "$" + (.amount/100|tostring)
+#  ] | sort_by(.date)),
+#  "Total: $\([$input | .data[] | .total] | add | . / 100)"
+#'
+
+curl https://api.stripe.com/v1/invoices -u $APIKEY: -G | jq -Cr "
+
+def todollar:
+  \"$\" + tostring;
+  
+def json:
+  [.data[]
+   | select(.customer_name | contains(\"$CLIENT\"))
+   | {invoice_id: .id,
+      client: .customer_name,
+      date: .date | strftime(\"%Y-%m-%d\"),
+      amount: (.total/100),
+      status: .status} ]
+  | sort_by(.date) ;
+
+json
+| map_values(.amount |= todollar),
+  \"Total: \" + (map(.amount) | add | todollar)
+"
+
+#
+#cat ~/code/inc/stripe-minified-anonymized.json | jq -C "[.data[] | {invoice_id: .id, client: .customer_name, date: .date | strftime(\"%Y-%m-%d\"), amount: .total, status: .status} | .amount = \"$\" + (.amount/100|tostring)] | sort_by(.date)"

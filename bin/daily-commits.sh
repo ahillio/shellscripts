@@ -4,7 +4,7 @@
 
 set -euo pipefail
 
-sudo su alec
+#sudo su alec
 
 DIRS=(
   "/home/alec/Documents/wiki"

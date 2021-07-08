@@ -14,6 +14,14 @@ while i < length:
 
 template = """# {date}
 {uline}
-"""
+[learnCode Pedagogy PoC](../education/pedagogy-proof-of-concept)
+[Documentation](../Documentation-Index.mkd)
+[Blog Content](../web-content-planning.mkd)
+[CS Education](../education/computer-programming-education-pitch.mkd)
+
+
+
+---
+linebreak needed for `techtag.py` to work `¯\_(ツ)_/¯`"""
 
 print(template.format(uline=uline, date=date))

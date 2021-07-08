@@ -6,7 +6,7 @@ import sys
 date = datetime.date.today()
 # print date
 taskID = sys.argv[1]
-newline = "  * [ ] task #" + taskID + "\n"
+newline = "* [ ] task #" + taskID + "\n"
 diary = "/home/alec/Documents/wiki/diary/" + str(date) + ".mkd"
 with open(diary, "r") as in_file:
     buf = in_file.readlines()
@@ -15,6 +15,7 @@ with open(diary, "w") as out_file:
     for line in buf:
         # if line == "- [ ] work\n":
         #if re.search(r'- \[.*\] work\n', line):
-        if line == "**Work**\n":
+        # @TODO more verbose logic to look for various sections in case "work" doesn't exist
+        if line == "## TODO\n":
             line = line + newline
         out_file.write(line)

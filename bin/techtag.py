@@ -28,30 +28,33 @@ for filename in sorted(os.listdir(directory)):
         for line in file:
             lnum += 1# manually increment the line number
             # keep track of what ##section we're in
-            if re.search(r'^#{2,} \w{1,}', line):
-                section = line.strip()
-                section = re.sub('###', '##', section)
-                section = re.sub(' ', '', section)
-                continue
+            # actually, tech diary doesn't have sections
+            #if re.search(r'^#{2,} \w{1,}', line):
+            #    section = line.strip()
+            #    section = re.sub('###', '##', section)
+            #    section = re.sub(' ', '', section)
+            #    continue
             # find tag and start copying tag content
             if tagname in line:
                 tagline = line
                 taglinenum = lnum
-                tagsection = section
+                #tagsection = section
                 copy = True
                 continue
             elif copy:
                 # if line does not match one of these patterns, proceed...
                 # it breaks without `^\s*$`
-                #if not re.search('^##|^---|^:\w*:|^- TODO', line):
-                if not re.search('^##|^---|^\s*$|^:\w*:|^- TODO', line):
+                # apparently it doesn't break anymore when removing that...
+                #if not re.search('^##|^---|^\s*$|^:\w*:|^- TODO', line):
+                # @TODO add "end of file" to the logic here...
+                if not re.search('^##|^---|^:\w*:|^- TODO', line):
                     # ...to add lines that follow tagname to the tagcontent variable
                     tagcontent += line
                 else:
                     # double negative, if above `not re.search(...)` is false...
                     # that means we've hit the end of that tag's content
                     # and we should now print our results
-                    print(date + ' ' + tagsection + ' ' + tagline.rstrip() + ' line#' + str(taglinenum))
+                    print(date + ' ' + tagline.rstrip() + ' line#' + str(taglinenum))
                     print(tagcontent)
                     tagcontent=''
                     # resume loop process of looking for next tag

@@ -30,8 +30,10 @@ for filename in sorted(os.listdir(directory)):
             # keep track of what ##section we're in
             if re.search(r'^#{2,} \w{1,}', line):
                 section = line.strip()
-                section = re.sub('###', '##', section)
-                section = re.sub(' ', '', section)
+                section = re.sub('#{1,} ', '*', section)
+                #section = re.sub('(\*\a{1,}) ', '\1\1* ', section)
+                #section = re.sub(' ', '', section)
+                section = section + '*'
                 continue
             # find tag and start copying tag content
             if tagname in line:

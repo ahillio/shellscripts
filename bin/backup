@@ -52,8 +52,10 @@ printf "\nDone syncing calendar.\n"
 rsync -avvr /home/alec/.password-store/ /media/alec/storage/.password-store/
 printf "\nDone syncing passwords.\n"
 
-rsync -avvr /home/alec/bin/ /media/alec/storage/bin/
-printf "\nDone syncing bin.\n"
+rsync -avvr /home/alec/code/bin/ /media/alec/storage/code/bin/
+rsync -avvr /home/alec/code/web/website-management-scripts/ /media/alec/storage/code/website-scripts/
+rsync -avvr /home/alec/code/inc/ /media/alec/storage/code/inc/
+printf "\nDone syncing code.\n"
 
 rsync -avvr /home/alec/.ssh/ /media/alec/storage/ssh/
 printf "\nDone syncing .ssh.\n"

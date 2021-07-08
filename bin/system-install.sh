@@ -210,10 +210,6 @@ pip install pygments-solarized-style
 git clone git@github.com:john2x/solarized-pygment.git
 # and then `sudo ./setup.py install`
 
-curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
-sudo apt-get install nodejs
-sudo npm install -g nodejs/repl
-npm install -g lodash
 
 
 # @TODO install
@@ -260,7 +256,13 @@ sudo apt-get install imagemagick
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
 nvm install node
 npm install gulp-cli -g
-npm install -g fb-messenger-cli 
+sudo apt install yarn
+# curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+# sudo apt-get install nodejs
+# sudo npm install -g nodejs/repl
+# npm install -g lodash
+
+# npm install -g fb-messenger-cli 
 
 sudo pip3 install asciinema # or with `-H`?
 sudo -H pip3 install asciinema
