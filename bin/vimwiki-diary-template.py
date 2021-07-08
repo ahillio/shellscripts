@@ -14,7 +14,6 @@ while i < length:
     uline += '-'
     i += 1
 
-
 # Today's calendar items
 # @TODO: does `calEvents = ''` need to be there?
 # note: when running that subprocess in `ptpython` do `print(calEvents.stdout)`
@@ -29,11 +28,20 @@ calEvents = calEvents.stdout + '\n'
 # Tasks
 tw = TaskWarrior('/home/alec/.task')
 tasksDue = tw.tasks.filter(status='pending', due__before='tomorrow')
-todaysTasks = ''
+otherTasks = ''
+workTasks = ''
+personalTasks = ''
 for task in tasksDue:
-    todaysTasks += '* [ ] ' + task['description'] + '  #' + task['uuid'][:8] + '\n'
+    if 'personal' in task['tags']:
+        personalTasks += '* [ ] ' + task['description'] + '  #' + task['uuid'][:8] + '\n'
+    elif 'work' in task['tags']:
+        workTasks += '* [ ] ' + task['description'] + '  #' + task['uuid'][:8] + '\n'
+    else:
+        otherTasks += '* [ ] ' + task['description'] + '  #' + task['uuid'][:8] + '\n'
 # @TODO: exclude work tasks on weekends :)
-# 1. get tags
+# 1. get tags like this:
+#    for task in tasksDue:
+#        print(task['description'], task['tags'])
 # 2. test `datetime.datetime.today().weekday() < 5` (days of week represented as 0-6 integers, so 5 is saturday)
 # 3. exclude tasks with `work` tag
 
@@ -54,7 +62,8 @@ with open (yesJournal, "r") as f:
 # so `# {date}` must be the exact title
 template = """# {date}
 {uline}
-[Diary template](../../../bin/vimwiki-diary-template.py)
+[Diary template](../../../code/bin/vimwiki-diary-template.py)
+{uline}
 [Journal](journal.mkd)
 [Blog Planning](../blog-planning.mkd)
 [groceries and stuff](groceries and stuff)
@@ -63,19 +72,26 @@ template = """# {date}
 
 
 ## TODO
-- [ ] get up | 
+- get up | 
 - [ ] shellbeads & [Prayer <3](../prayer.mkd)
 - [ ] tea/breakfast journal
 
-{yesNotes}{calEvents}{todaysTasks}
-**Care**
+{yesNotes}{calEvents}{otherTasks}
+
+**Ministries**
+
+**$$ Work $$**
+{workTasks}
+
+**Care for Alec**
+{personalTasks}
 - [ ] body self care, deep relaxtion/nourishment
 - [ ] find solace in nature
 - [ ] meditate
 
 **Night**
 - [ ] shellbeads & [Prayer <3](../prayer.mkd)
-- [ ] sleep @
+- sleep @
 
 --------
 
@@ -93,5 +109,5 @@ template = """# {date}
 
 ## Tomorrow"""
 
-print(template.format(uline=uline, date=date, todaysTasks=todaysTasks, yesNotes=yesNotes, calEvents=calEvents))
+print(template.format(uline=uline, date=date, workTasks=workTasks, personalTasks=personalTasks, otherTasks=otherTasks, yesNotes=yesNotes, calEvents=calEvents))
 #print(template.format(uline=uline, date=date, todaysTasks=todaysTasks, yesNotes=yesNotes, calEvents=calEvents.stdout))
